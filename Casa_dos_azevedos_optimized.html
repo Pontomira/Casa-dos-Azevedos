@@ -1,0 +1,2452 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa dos Azevedos - Digital Guest Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+                    colors: {
+                        brand: { 50: '#f6f8f6', 100: '#e3eae3', 500: '#3e6b5a', 600: '#2d5244', 700: '#234136', 800: '#1c342b', 900: '#162b23' },
+                        sand: { 50: '#faf8f5', 100: '#f3eee7', 200: '#e5dacf' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #faf8f5; color: #2d3748; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(229, 218, 207, 0.6);
+        }
+        .tab-btn { color: #4b5563; }
+        .tab-btn:hover { color: #2d5244; }
+        .tab-btn.active, .tab-btn.active:hover {
+            background-color: #2d5244;
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(45, 82, 68, 0.25);
+        }
+        .flag {
+            display: inline-block;
+            width: 20px;
+            height: 14px;
+            flex-shrink: 0;
+            border-radius: 2px;
+            background-size: 100% 100%;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+        }
+        .flag-pt { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 40'%3E%3Crect width='60' height='40' fill='%23FF0000'/%3E%3Crect width='24' height='40' fill='%23006600'/%3E%3Ccircle cx='24' cy='20' r='7' fill='%23FFE000'/%3E%3Cpath d='M20.5 16h7v5a3.5 3.5 0 0 1-7 0z' fill='%23FF0000'/%3E%3Crect x='22.5' y='17.5' width='3' height='3' fill='%23fff'/%3E%3C/svg%3E"); }
+        .flag-es { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 40'%3E%3Crect width='60' height='40' fill='%23AA151B'/%3E%3Crect y='10' width='60' height='20' fill='%23F1BF00'/%3E%3C/svg%3E"); }
+        .flag-en { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30' preserveAspectRatio='none'%3E%3CclipPath id='s'%3E%3Cpath d='M0,0 v30 h60 v-30 z'/%3E%3C/clipPath%3E%3CclipPath id='t'%3E%3Cpath d='M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z'/%3E%3C/clipPath%3E%3Cg clip-path='url(%23s)'%3E%3Cpath d='M0,0 v30 h60 v-30 z' fill='%23012169'/%3E%3Cpath d='M0,0 L60,30 M60,0 L0,30' stroke='%23fff' stroke-width='6'/%3E%3Cpath d='M0,0 L60,30 M60,0 L0,30' clip-path='url(%23t)' stroke='%23C8102E' stroke-width='4'/%3E%3Cpath d='M30,0 v30 M0,15 h60' stroke='%23fff' stroke-width='10'/%3E%3Cpath d='M30,0 v30 M0,15 h60' stroke='%23C8102E' stroke-width='6'/%3E%3C/g%3E%3C/svg%3E"); }
+        .flag-fr { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 40'%3E%3Crect width='20' height='40' fill='%230055A4'/%3E%3Crect x='20' width='20' height='40' fill='%23fff'/%3E%3Crect x='40' width='20' height='40' fill='%23EF4135'/%3E%3C/svg%3E"); }
+        .flag-de { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 40'%3E%3Crect width='60' height='40' fill='%23000'/%3E%3Crect y='13.33' width='60' height='13.34' fill='%23DD0000'/%3E%3Crect y='26.67' width='60' height='13.33' fill='%23FFCE00'/%3E%3C/svg%3E"); }
+        .flag-it { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 40'%3E%3Crect width='20' height='40' fill='%23009246'/%3E%3Crect x='20' width='20' height='40' fill='%23fff'/%3E%3Crect x='40' width='20' height='40' fill='%23CE2B37'/%3E%3C/svg%3E"); }
+        .flag-pl { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 40'%3E%3Crect width='60' height='20' fill='%23fff'/%3E%3Crect y='20' width='60' height='20' fill='%23DC143C'/%3E%3C/svg%3E"); }
+        .lang-opt[aria-current="true"] { background-color: #f3eee7; font-weight: 700; }
+        #keypadAnim { width: 100%; max-width: 300px; padding: 20px; }
+        #kpPad { position: relative; background: #2B2D31; border: 1px solid #4A4D55; border-radius: 20px; padding: 16px; overflow: hidden; }
+        #kpDisp { height: 52px; border-radius: 12px; background: #17181B; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; transition: background .3s; }
+        #kpDisp.open { background: #1F7A52; }
+        #kpDisp .slots { display: flex; gap: 10px; }
+        #kpDisp .s { width: 26px; height: 30px; text-align: center; font: 500 24px/30px ui-monospace, Menlo, Consolas, monospace; color: #5B5F67; border-bottom: 2px solid #3A3D44; transition: color .15s, border-color .15s; }
+        #kpDisp .s.f { color: #E8FFF3; border-color: #6EE7A8; font-size: 30px; padding-top: 8px; height: 22px; }
+        #kpDisp .ok { display: none; font-size: 26px; color: #D9FBE8; }
+        #kpDisp.open .slots { display: none; }
+        #kpDisp.open .ok { display: block; }
+        #kpKeys { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+        #kpKeys .k { height: 46px; border-radius: 12px; background: #3A3D44; color: #F1F1F1; display: flex; align-items: center; justify-content: center; font: 500 20px ui-monospace, Menlo, Consolas, monospace; transition: background .12s, transform .12s; }
+        #kpKeys .k.on { background: #6B7280; transform: scale(.94); }
+        #kpKeys .k.dim { color: #7C8088; }
+        #kpKeys .k.key { background: #E3A93B; color: #3A2606; font-size: 20px; }
+        #kpKeys .k.key.on { background: #F5C86A; }
+        #kpHand { position: absolute; left: 0; top: 0; width: 56px; height: 76px; pointer-events: none; z-index: 2; opacity: 0; }
+        #kpHandIn { width: 100%; height: 100%; transform-origin: 27.5px 2px; transform: rotate(-14deg); transition: transform .14s; }
+        #kpHandIn.p { transform: rotate(-14deg) translateY(4px) scale(.96); }
+        @media (max-height: 520px) {
+            #keypadAnim { padding: 12px; }
+            #kpKeys .k { height: 34px; }
+            #kpDisp { height: 40px; margin-bottom: 10px; }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
+
+    <!-- TOP NAVIGATION & LANGUAGE SWITCHER -->
+    <header class="sticky top-0 z-50 glass-card border-b border-sand-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo / Title -->
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-10 h-10 rounded-full bg-brand-600 text-white flex items-center justify-center font-bold text-xl shadow-md">
+                    CA
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg text-gray-900 tracking-tight leading-none">Casa dos Azevedos</h1>
+                    <span class="text-xs text-brand-600 font-semibold tracking-wider uppercase">Câmara de Lobos •
+                        Madeira</span>
+                </div>
+            </div>
+
+            <!-- Language Switcher & Quick SOS -->
+            <div class="flex items-center gap-3">
+                <a href="tel:112"
+                    class="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 text-xs font-bold px-3 py-2 rounded-full transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-phone-flip text-red-500"></i>
+                    <span>112</span>
+                </a>
+
+                <!-- Language Selector Dropdown -->
+                <div id="langMenu" class="relative">
+                    <button id="langBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language" class="bg-white border border-sand-200 font-medium text-xs rounded-full pl-3 pr-3 py-2 flex items-center gap-2 cursor-pointer hover:border-brand-500 transition focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <span id="langFlag" class="flag flag-en"></span>
+                        <span id="langCode">EN</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] text-stone-400"></i>
+                    </button>
+                    <ul id="langList" class="hidden absolute right-0 mt-2 w-28 bg-white border border-sand-200 rounded-xl shadow-lg py-1 overflow-hidden z-50">
+                        <li><button type="button" data-lang="pt" class="lang-opt w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-gray-800 hover:bg-sand-100 transition"><span class="flag flag-pt"></span><span>PT</span></button></li>
+                        <li><button type="button" data-lang="es" class="lang-opt w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-gray-800 hover:bg-sand-100 transition"><span class="flag flag-es"></span><span>ES</span></button></li>
+                        <li><button type="button" data-lang="en" class="lang-opt w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-gray-800 hover:bg-sand-100 transition" aria-current="true"><span class="flag flag-en"></span><span>EN</span></button></li>
+                        <li><button type="button" data-lang="fr" class="lang-opt w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-gray-800 hover:bg-sand-100 transition"><span class="flag flag-fr"></span><span>FR</span></button></li>
+                        <li><button type="button" data-lang="de" class="lang-opt w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-gray-800 hover:bg-sand-100 transition"><span class="flag flag-de"></span><span>DE</span></button></li>
+                        <li><button type="button" data-lang="it" class="lang-opt w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-gray-800 hover:bg-sand-100 transition"><span class="flag flag-it"></span><span>IT</span></button></li>
+                        <li><button type="button" data-lang="pl" class="lang-opt w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-gray-800 hover:bg-sand-100 transition"><span class="flag flag-pl"></span><span>PL</span></button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO WELCOME SECTION -->
+    <section
+        class="relative bg-gradient-to-b from-brand-900 via-brand-800 to-brand-700 text-white pt-10 pb-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div
+            class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]">
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-brand-100 text-xs font-medium backdrop-blur-md mb-4 border border-white/10">
+                <i class="fa-solid fa-house-user text-xs"></i> RNAL 176349/AL
+            </span>
+            <h2 data-i18n="hero-title" class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">Welcome to Casa dos Azevedos</h2>
+            <p data-i18n="hero-subtitle"
+                class="text-base sm:text-lg text-sand-100 max-w-2xl mx-auto font-light leading-relaxed">Everything you need for a comfortable stay. Please explore our digital guide for house rules, equipment instructions, and local recommendations.</p>
+
+            <!-- Quick Action Badges -->
+            <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
+                <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-3.5 text-center">
+                    <i class="fa-solid fa-clock text-amber-300 text-lg mb-1 block"></i>
+                    <span class="text-xs text-stone-300 block" data-i18n="badge-checkin-lbl">Check-in</span>
+                    <span class="font-bold text-sm">16:00</span>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-3.5 text-center">
+                    <i class="fa-solid fa-door-open text-amber-300 text-lg mb-1 block"></i>
+                    <span class="text-xs text-stone-300 block" data-i18n="badge-checkout-lbl">Check-out</span>
+                    <span class="font-bold text-sm">12:00</span>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-3.5 text-center">
+                    <i class="fa-solid fa-wifi text-amber-300 text-lg mb-1 block"></i>
+                    <span class="text-xs text-stone-300 block">Wi-Fi</span>
+                    <span class="font-bold text-xs truncate block" title="CasaDosAzevedos">In-House Manual</span>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-3.5 text-center">
+                    <i class="fa-solid fa-phone text-amber-300 text-lg mb-1 block"></i>
+                    <span class="text-xs text-stone-300 block" data-i18n="badge-host-lbl">Host Support</span>
+                    <span class="font-bold text-xs truncate block">Victor Azevedo</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN NAVIGATION TABS -->
+    <nav class="sticky top-20 z-40 bg-white/90 backdrop-blur-md border-b border-sand-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-wrap justify-center items-center gap-2 py-3 text-sm font-medium" id="tabNav">
+                <button data-tab="contacts" data-i18n="tab-contacts" class="tab-btn active px-4 py-2.5 rounded-full whitespace-nowrap transition">Contacts</button>
+                <button data-tab="access" data-i18n="tab-access" class="tab-btn px-4 py-2.5 rounded-full whitespace-nowrap transition">Access & Parking</button>
+                <button data-tab="checkin" data-i18n="tab-checkin" class="tab-btn px-4 py-2.5 rounded-full whitespace-nowrap transition">Check-In / Out</button>
+                <button data-tab="rules" data-i18n="tab-rules" class="tab-btn px-4 py-2.5 rounded-full whitespace-nowrap transition">House Rules</button>
+                <button data-tab="appliances" data-i18n="tab-appliances" class="tab-btn px-4 py-2.5 rounded-full whitespace-nowrap transition">Appliances</button>
+                <button data-tab="safety" data-i18n="tab-safety" class="tab-btn px-4 py-2.5 rounded-full whitespace-nowrap transition">Safety & Eco</button>
+                <button data-tab="explore" data-i18n="tab-explore" class="tab-btn px-4 py-2.5 rounded-full whitespace-nowrap transition">Explore Madeira</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENT SECTIONS CONTAINER -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
+
+        <!-- 1. CONTACTS & EMERGENCY TAB -->
+        <section id="content-contacts" class="tab-content space-y-8">
+            <div class="border-b border-sand-200 pb-4">
+                <h3 class="text-2xl font-bold text-gray-900" data-i18n="contacts-heading">Important Contacts</h3>
+                <p class="text-stone-600 text-sm" data-i18n="contacts-sub">We are here to assist you during your stay.</p>
+            </div>
+
+            <!-- Hosts Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Host Card -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-sand-200 hover:shadow-md transition">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-xl font-bold">
+                                VA
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Victor Wilson G. Azevedo</h4>
+                                <span
+                                    class="inline-block bg-brand-50 text-brand-700 text-xs px-2.5 py-0.5 rounded-full font-medium">Main
+                                    Host</span>
+                                <p class="text-xs text-stone-500 mt-1"><i class="fa-solid fa-language mr-1"></i>
+                                    Português, Español, English</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 space-y-2">
+                        <a href="tel:969720903"
+                            class="flex items-center justify-between p-3 rounded-xl bg-sand-50 hover:bg-sand-100 transition text-sm font-medium text-gray-800">
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-phone text-brand-600"></i> +351
+                                969 720 903</span>
+                            <i class="fa-solid fa-chevron-right text-xs text-stone-400"></i>
+                        </a>
+                        <a href="mailto:casa.dos.azevedos.2026@gmail.com"
+                            class="flex items-center justify-between p-3 rounded-xl bg-sand-50 hover:bg-sand-100 transition text-sm font-medium text-gray-800">
+                            <span class="flex items-center gap-2 truncate"><i
+                                    class="fa-solid fa-envelope text-brand-600"></i>
+                                casa.dos.azevedos.2026@gmail.com</span>
+                            <i class="fa-solid fa-chevron-right text-xs text-stone-400"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hostess Card -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-sand-200 hover:shadow-md transition">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-xl font-bold">
+                                BA
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Blandina Azevedo</h4>
+                                <span
+                                    class="inline-block bg-amber-50 text-amber-800 text-xs px-2.5 py-0.5 rounded-full font-medium">Hostess</span>
+                                <p class="text-xs text-stone-500 mt-1"><i class="fa-solid fa-language mr-1"></i>
+                                    Português</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 space-y-2">
+                        <a href="tel:967559005"
+                            class="flex items-center justify-between p-3 rounded-xl bg-sand-50 hover:bg-sand-100 transition text-sm font-medium text-gray-800">
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-phone text-brand-600"></i> +351
+                                967 559 005</span>
+                            <i class="fa-solid fa-chevron-right text-xs text-stone-400"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emergency Banner -->
+            <div
+                class="bg-gradient-to-r from-red-600 to-red-700 text-white rounded-2xl p-6 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-4 text-center sm:text-left">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-3xl flex-shrink-0">
+                        🚨
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl" data-i18n="emerg-title">Emergency Number: 112</h4>
+                        <p class="text-red-100 text-sm" data-i18n="emerg-desc">For Police, Ambulance, or Fire Department throughout Portugal.</p>
+                    </div>
+                </div>
+                <a href="tel:112"
+                    class="bg-white text-red-600 font-bold px-6 py-3 rounded-xl hover:bg-red-50 transition shadow-sm whitespace-nowrap">
+                    <span data-i18n="emerg-call">Call 112 now</span>
+                </a>
+            </div>
+
+            <!-- Health & Pharmacies -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-sand-200">
+                <h4 class="font-bold text-lg text-gray-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-hospital-user text-brand-600"></i>
+                    <span data-i18n="health-heading">Health Services & Pharmacies Nearby</span>
+                </h4>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <a href="https://maps.app.goo.gl/1fwFJEzrUCRWh8FS6" target="_blank" class="block">
+                        <div class="p-4 rounded-xl border border-sand-200 bg-sand-50/50">
+                            <span class="text-xs font-semibold text-brand-600 uppercase tracking-wider block mb-1" data-i18n="medical_care">Medical Care</span>
+                            <h5 class="font-bold text-gray-800">Health Center</h5>
+                            <p class="text-xs text-stone-500 mt-1">Câmara de Lobos Health Unit</p>
+                        </div>
+                    </a>
+                    <a href="https://maps.app.goo.gl/zSTdtoDC27TUNQ159" target="_blank" class="block">
+                        <div class="p-4 rounded-xl border border-sand-200 bg-sand-50/50">
+                            <span class="text-xs font-semibold text-red-600 uppercase tracking-wider block mb-1" data-i18n="emergency_hospital">Emergency Hospital</span>
+                            <h5 class="font-bold text-gray-800">Public Hospital</h5>
+                            <p class="text-xs text-stone-500 mt-1">Hospital Dr. Nélio Mendonça (Funchal)</p>
+                        </div>
+                    </a>
+                    <a href="https://maps.app.goo.gl/f6nEKNg8DiLK6ESs9" target="_blank" class="block">
+                        <div class="p-4 rounded-xl border border-sand-200 bg-sand-50/50">
+                            <span class="text-xs font-semibold text-blue-600 uppercase tracking-wider block mb-1" data-i18n="private_care">Private Care</span>
+                            <h5 class="font-bold text-gray-800">Private Hospital</h5>
+                            <p class="text-xs text-stone-500 mt-1">Hospital Particular da Madeira</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="mt-6">
+                    <h5 class="font-semibold text-stone-800 text-sm mb-3" data-i18n="pharmacy-list">Closest Pharmacies:</h5>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <a href="https://maps.app.goo.gl/NH8HSkdK5SN1DynE7" target="_blank" class="block">
+                            <div class="p-4 rounded-xl border border-sand-200 bg-sand-50/50">
+                                <h5 class="font-bold text-gray-800">Farmácia Popular</h5>
+                                <p class="text-xs text-stone-500 mt-1">Câmara de Lobos</p>
+                            </div>
+                        </a>
+                        <a href="https://maps.app.goo.gl/grgQp5ajcwYxxaoZ9" target="_blank" class="block">
+                            <div class="p-4 rounded-xl border border-sand-200 bg-sand-50/50">
+                                <h5 class="font-bold text-gray-800">Farmácia Moderna</h5>
+                                <p class="text-xs text-stone-500 mt-1">Câmara de Lobos</p>
+                            </div>
+                        </a>
+                        <a href="https://maps.app.goo.gl/BzXmbNsCVRgeq3bb6" target="_blank" class="block">
+                            <div class="p-4 rounded-xl border border-sand-200 bg-sand-50/50">
+                                <h5 class="font-bold text-gray-800">Farmácia Lobos Mar</h5>
+                                <p class="text-xs text-stone-500 mt-1">Câmara de Lobos</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ACCESS & PARKING TAB -->
+        <section id="content-access" class="tab-content hidden space-y-8">
+            <div class="border-b border-sand-200 pb-4">
+                <h3 class="text-2xl font-bold text-gray-900" data-i18n="access-heading">Directions & Parking</h3>
+                <p class="text-stone-600 text-sm" data-i18n="access-sub">Step-by-step guidance to reach Casa dos Azevedos smoothly.</p>
+            </div>
+
+            <!-- Parking Note -->
+            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5 flex items-start gap-4">
+                <i class="fa-solid fa-square-parking text-amber-600 text-2xl mt-0.5"></i>
+                <div>
+                    <h4 class="font-bold text-amber-900" data-i18n="parking-title">Parking Notice</h4>
+                    <p class="text-sm text-amber-800 mt-1 leading-relaxed" data-i18n="parking-desc">This property does not provide private parking. However, convenient public parking options and designated access routes are detailed below.<br /><br /> <strong>Click the boxes to view images of the route.</strong></p>
+                </div>
+            </div>
+
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Light Blue Route -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-sand-200 flex flex-col justify-between cursor-pointer" data-gallery="Route_1">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span
+                                class="bg-sky-100 text-sky-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Route
+                                A</span>
+                            <i class="fa-solid fa-route text-sky-500 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-gray-900" data-i18n="lightblue-title">Light Blue Route</h4>
+                        <p class="text-xs text-stone-500 mt-1 mb-4" data-i18n="route-step-desc">Follow the indicated route to reach the house entrance.</p>
+
+                        <!-- Visual Step Indicator -->
+                        <div class="space-y-3 mt-4">
+                            <div class="flex items-center gap-3 p-3 bg-stone-50 rounded-xl">
+                                <span
+                                    class="w-6 h-6 rounded-full bg-sky-500 text-white font-bold text-xs flex items-center justify-center">1</span>
+                                <span class="text-xs font-medium text-stone-700" data-i18n="main_road">Main road, João Gonçalves Zarco</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-stone-50 rounded-xl">
+                                <span
+                                    class="w-6 h-6 rounded-full bg-sky-500 text-white font-bold text-xs flex items-center justify-center">2</span>
+                                <span class="text-xs font-medium text-stone-700"
+                                    data-i18n="pedestrian_footpath">Footpath / Levada</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-stone-50 rounded-xl">
+                                <span
+                                    class="w-6 h-6 rounded-full bg-sky-500 text-white font-bold text-xs flex items-center justify-center">3</span>
+                                <span class="text-xs font-medium text-stone-700" data-i18n="house_entrance_stairs">Stairs to the house</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dark Blue Route -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-sand-200 flex flex-col justify-between cursor-pointer" data-gallery="Route_2">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span
+                                class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Route
+                                B</span>
+                            <i class="fa-solid fa-route text-indigo-500 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-gray-900" data-i18n="darkblue-title">Dark Blue Route</h4>
+                        <p class="text-xs text-stone-500 mt-1 mb-4" data-i18n="darkblue-desc">Follow the dark blue route to reach the nearest public parking and the house entrance.</p>
+
+                        <div class="space-y-3 mt-4">
+                            <div class="flex items-center gap-3 p-3 bg-stone-50 rounded-xl">
+                                <span
+                                    class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center">1</span>
+                                <span class="text-xs font-medium text-stone-700" data-i18n="parking_lot">Parking lot</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-stone-50 rounded-xl">
+                                <span
+                                    class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center">2</span>
+                                <span class="text-xs font-medium text-stone-700" data-i18n="narrow_access_road">Pedestrian path / Levada</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-stone-50 rounded-xl">
+                                <span
+                                    class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center">3</span>
+                                <span class="text-xs font-medium text-stone-700" data-i18n="direct_steps">Stairs to the house</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image below both route cards -->
+            <div class="mt-6">
+                <img src="images/Estacionamentos.png" alt="Map showing Route A and Route B" loading="lazy" decoding="async" class="w-full rounded-2xl shadow-sm border border-sand-200">
+            </div>
+
+            <!-- Driving Advisory -->
+            <div class="bg-white rounded-2xl p-6 border border-sand-200 shadow-sm">
+                <h4 class="font-bold text-gray-900 mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-triangle-exclamation text-amber-500"></i>
+                    <span data-i18n="traffic-warning-title">Important note about driving</span>
+                </h4>
+                <p class="text-stone-600 text-sm leading-relaxed" data-i18n="traffic-warning-desc">On Rua do Alto da Torre, traffic is one-way. Although driving down certain blue route sections is legally possible, it is not recommended because the roads are very narrow. We advise parking in the designated car park and walking the short footpath.</p>
+            </div>
+
+
+            <!-- Light Green Route -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-sand-200 flex flex-col justify-between cursor-pointer" data-gallery="Route_3">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span
+                            class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Route
+                            C</span>
+                        <i class="fa-solid fa-route text-green-500 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-900" data-i18n="lightgreen-title">Light Green Route</h4>
+                    <p class="text-xs text-stone-500 mt-1 mb-4" data-i18n="route-step-desc">Follow the indicated route to reach the house entrance.</p>
+
+                    <!-- Visual Step Indicator -->
+                    <div class="space-y-3 mt-4">
+                        <div class="flex items-center gap-3 p-3 bg-stone-50 rounded-xl">
+                            <span
+                                class="w-6 h-6 rounded-full bg-sky-500 text-white font-bold text-xs flex items-center justify-center">1</span>
+                            <span class="text-xs font-medium text-stone-700"
+                                data-i18n="designated_parking_area">Designated parking area</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-stone-50 rounded-xl">
+                            <span
+                                class="w-6 h-6 rounded-full bg-sky-500 text-white font-bold text-xs flex items-center justify-center">2</span>
+                            <span class="text-xs font-medium text-stone-700"
+                                data-i18n="pedestrian_footpath">Footpath / Levada</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-stone-50 rounded-xl">
+                            <span
+                                class="w-6 h-6 rounded-full bg-sky-500 text-white font-bold text-xs flex items-center justify-center">3</span>
+                            <span class="text-xs font-medium text-stone-700" data-i18n="house_entrance_stairs">Stairs to the house</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <img src="images/Estacionamentos_torre.png" alt="Map showing Route C" loading="lazy" decoding="async" class="w-full rounded-2xl shadow-sm border border-sand-200">
+            </div>
+        </section>
+
+        <!-- 3. CHECK-IN / CHECK-OUT TAB -->
+        <section id="content-checkin" class="tab-content hidden space-y-8">
+            <div class="border-b border-sand-200 pb-4">
+                <h3 class="text-2xl font-bold text-gray-900" data-i18n="checkin-heading">Check-in & Check-out Instructions</h3>
+                <p class="text-stone-600 text-sm" data-i18n="checkin-sub">Self check-in procedure and smooth departure checklist.</p>
+            </div>
+
+            <!-- Linen & towels notice -->
+            <div class="flex items-start gap-4 bg-brand-50 border border-brand-100 rounded-2xl p-5">
+                <span class="w-12 h-12 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center text-xl flex-shrink-0"><i class="fa-solid fa-bed"></i></span>
+                <div>
+                    <h4 class="font-bold text-brand-900" data-i18n="linen_title">Bed Linen & Towels Included</h4>
+                    <p class="text-sm text-brand-700 mt-1 leading-relaxed" data-i18n="linen_desc">Bed sheets and towels are included in your stay.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Check-in Info -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-sand-200">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-key"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900" data-i18n="checkin-title">Check-in Details</h4>
+                    <p class="text-xs text-brand-600 font-semibold uppercase tracking-wider mt-1"
+                        data-i18n="checkin-time-lbl">Schedule: From 16:00 (4:00 PM)</p>
+
+                    <div class="mt-6 space-y-4">
+                        <div class="p-4 bg-sand-50 rounded-xl border border-sand-200">
+                            <h5 class="font-bold text-stone-800 text-sm mb-1" data-i18n="smartlock-title">Smart keypad method</h5>
+                            <div class="h-[200px] overflow-hidden rounded-2xl border border-sand-200">
+                                <img src="images/door_bell_keyboard.jpg" data-gallery="keypad" loading="lazy" decoding="async" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition">
+                            </div>
+                        </div>
+
+                        <div class="border-t border-sand-200 pt-4">
+                            <h5 class="font-bold text-stone-800 text-xs uppercase tracking-wider mb-2"
+                                data-i18n="smartlock-steps">STEP-BY_STEP</h5>
+                            <ol class="list-decimal list-inside text-xs text-stone-600 space-y-1.5">
+                                <li class="text-xs text-stone-600" data-i18n="walk_front">Walk towards the front of the house.</li>
+                                <li data-i18n="locate_keyboard">Locate the illuminated digital keypad.</li>
+                                <li data-i18n="type_code">Enter the 4-digit access code provided by the host.</li>
+                                <li data-i18n="press_key">Press the KEY ICON button to unlock the door.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Check-out Info & Checklist -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-sand-200 flex flex-col justify-between">
+                    <div>
+                        <div
+                            class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-xl font-bold mb-4">
+                            <i class="fa-solid fa-person-walking-luggage"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900" data-i18n="checkout-title">Check-out Details</h4>
+                        <p class="text-xs text-amber-700 font-semibold uppercase tracking-wider mt-1"
+                            data-i18n="checkout-time-lbl">Schedule: Until 12:00 PM (Noon)</p>
+
+                        <!-- Checklist -->
+                        <div class="mt-6">
+                            <h5 class="font-bold text-stone-800 text-sm mb-3" data-i18n="checkout-checklist-title">Check-out Checklist:</h5>
+                            <div class="space-y-2.5">
+                                <div
+                                    class="flex items-center gap-3 p-3 rounded-xl bg-sand-50 hover:bg-sand-100 transition">
+                                    <span class="text-xs text-stone-700 font-medium" data-i18n="chk-lights">Turn off all lights and appliances</span>
+                                </div>
+                                <div
+                                    class="flex items-center gap-3 p-3 rounded-xl bg-sand-50 hover:bg-sand-100 transition">
+                                    <span class="text-xs text-stone-700 font-medium" data-i18n="chk-windows">Close all windows securely</span>
+                                </div>
+                                <div
+                                    class="flex items-center gap-3 p-3 rounded-xl bg-sand-50 hover:bg-sand-100 transition">
+                                    <span class="text-xs text-stone-700 font-medium" data-i18n="chk-trash">Take out trash to designated recycling bins</span>
+                                </div>
+                                <div
+                                    class="flex items-center gap-3 p-3 rounded-xl bg-sand-50 hover:bg-sand-100 transition">
+                                    <span class="text-xs text-stone-700 font-medium" data-i18n="chk-door">Ensure the front door is locked properly</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-sand-200">
+                        <p class="text-xs text-stone-500 text-center" data-i18n="checkout-thanks">We wish you a safe journey back home! Safe travels!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. HOUSE RULES TAB -->
+        <section id="content-rules" class="tab-content hidden space-y-8">
+            <div class="border-b border-sand-200 pb-4">
+                <h3 class="text-2xl font-bold text-gray-900" data-i18n="rules-heading">General House Rules</h3>
+                <p class="text-stone-600 text-sm" data-i18n="rules-sub">Please respect these guidelines to ensure a pleasant stay for everyone.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Quiet Hours -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-sand-200">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg mb-3">
+                        <i class="fa-solid fa-volume-xmark"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900" data-i18n="rule-quiet-title">Quiet Hours</h4>
+                    <p class="text-xs text-stone-500 mt-1">11:00 PM – 7:00 AM</p>
+                    <p class="text-xs text-stone-600 mt-2 leading-relaxed" data-i18n="rule-quiet-desc">Please minimize noise during nighttime hours and respect our neighbors.</p>
+                </div>
+
+                <!-- Smoking -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-sand-200">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center text-lg mb-3">
+                        <i class="fa-solid fa-ban-smoking"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900" data-i18n="rule-smoke-title">No Smoking inside</h4>
+                    <p class="text-xs text-stone-500 mt-1" data-i18n="rule-smoke-desc">Cigarettes, E-cigs, Vapes</p>
+                    <p class="text-xs text-stone-600 mt-2 leading-relaxed" data-i18n="rule-smoke-body">Smoking is strictly prohibited indoors. Allowed only outdoors on the access path.</p>
+                </div>
+
+                <!-- Parties & Events -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-sand-200">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-lg mb-3">
+                        <i class="fa-solid fa-champagne-glasses"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900" data-i18n="rule-party-title">No Parties</h4>
+                    <p class="text-xs text-stone-500 mt-1" data-i18n="rule-party-desc">Strict policy</p>
+                    <p class="text-xs text-stone-600 mt-2 leading-relaxed" data-i18n="rule-party-body">Parties are not allowed on the property to ensure a peaceful environment for all neighbors and guests.</p>
+                </div>
+
+                <!-- Visitors -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-sand-200">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg mb-3">
+                        <i class="fa-solid fa-user-group"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900" data-i18n="rule-visitors-title">Visitors policy</h4>
+                    <p class="text-xs text-stone-500 mt-1" data-i18n="rule-visitors-desc">Inform the Host of any unregistered visitors</p>
+                    <p class="text-xs text-stone-600 mt-2 leading-relaxed" data-i18n="rule-visitors-body">Overnight guests are not permitted without prior host consent (fees may apply).</p>
+                </div>
+
+                <!-- Pets -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-sand-200">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-lg mb-3">
+                        <i class="fa-solid fa-paw"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900" data-i18n="rule-pets-title">No Pets Allowed</h4>
+                    <p class="text-xs text-stone-500 mt-1" data-i18n="rule-pets-desc">Property is pet-free</p>
+                    <p class="text-xs text-stone-600 mt-2 leading-relaxed" data-i18n="rule-pets-body">Pets are not allowed in the property to maintain hygiene standards.</p>
+                </div>
+
+                <!-- Children & Baby Cot -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-sand-200">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg mb-3">
+                        <i class="fa-solid fa-baby"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900" data-i18n="rule-children-title">Children Policy</h4>
+                    <p class="text-xs text-stone-500 mt-1" data-i18n="rule-children-desc">Children under 12 years old</p>
+                    <p class="text-xs text-stone-600 mt-2 leading-relaxed" data-i18n="rule-children-body">Children under 12 years old are not allowed without adult supervision. Cot is available on request.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. APPLIANCES & EQUIPMENT TAB -->
+        <section id="content-appliances" class="tab-content hidden space-y-8">
+            <div class="border-b border-sand-200 pb-4">
+                <h3 class="text-2xl font-bold text-gray-900" data-i18n="app-heading">Equipments & Operation</h3>
+                <p class="text-stone-600 text-sm" data-i18n="app-sub">Quick guide to operating home appliances easily.</p>
+            </div>
+
+            <!-- Accordion / Appliance Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- TV -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-sand-200 flex flex-col">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-tv"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900" data-i18n="smart_TV">Smart TV</h4>
+                            <span class="text-xs text-stone-500" data-i18n="location_tv">Living Room</span>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-stone-600 space-y-2 list-disc list-inside leading-relaxed">
+                        <li data-i18n="remote_on">Press the <strong>Power</strong> button to turn on the TV.</li>
+                        <li data-i18n="netflix">Smart TV supports apps like <strong>Netflix</strong> (use your personal account).</li>
+                        <li data-i18n="important_personal"><strong>Important:</strong> Please log out of personal streaming accounts before departure.</li>
+                    </ul>
+                    <div class="mt-auto pt-6 h-[200px] overflow-hidden rounded-xl">
+                        <img src="images/TV.jpeg" data-gallery="TV" loading="lazy" decoding="async" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition">
+                    </div>
+                </div>
+
+                <!-- Induction Hob -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-sand-200 flex flex-col">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-fire-burner"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900" data-i18n="induction_hob">Induction Hob</h4>
+                            <span class="text-xs text-stone-500" data-i18n="location_kitchen">Kitchen</span>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-stone-600 space-y-2 list-disc list-inside leading-relaxed">
+                        <li data-i18n="press_power_button">Press the <strong>power button (leftmost)</strong> to turn on.</li>
+                        <li data-i18n="select_cooking_zone">Select desired cooking zone on screen.</li>
+                        <li data-i18n="adjust_heat_intensity">Adjust heat intensity using <strong>“+”</strong> and <strong>“-”</strong> symbols.</li>
+                    </ul>
+                    <div class="mt-auto pt-6 h-[200px] overflow-hidden rounded-xl">
+                        <img src="images/kitchen_top.jpg" data-gallery loading="lazy" decoding="async" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition">
+                    </div>
+                </div>
+
+                <!-- Microwave -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-sand-200 flex flex-col">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-wave-square"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900" data-i18n="microwave">Microwave Oven</h4>
+                            <span class="text-xs text-stone-500" data-i18n="location_kitchen">Kitchen</span>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-stone-600 space-y-2 list-disc list-inside leading-relaxed">
+                        <li data-i18n="open_door">Open door using the <strong>large bottom button</strong>.</li>
+                        <li data-i18n="set_heating_time">Set heating time by pressing the <strong>clock icon</strong> followed by <strong>Start</strong>.</li>
+                    </ul>
+                    <div class="mt-auto pt-6 h-[200px] overflow-hidden rounded-xl">
+                        <img src="images/microwave.jpg" data-gallery loading="lazy" decoding="async" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition">
+                    </div>
+                </div>
+
+                <!-- Oven -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-sand-200 flex flex-col">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-square-poll-horizontal"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900" data-i18n="electric_oven">Electric Oven</h4>
+                            <span class="text-xs text-stone-500" data-i18n="location_kitchen">Kitchen</span>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-stone-600 space-y-2 list-disc list-inside leading-relaxed">
+                        <li data-i18n="left_dial"><strong>Left Dial:</strong> Cooking mode / function.</li>
+                        <li data-i18n="center_dial"><strong>Center Dial:</strong> Timer alert.</li>
+                        <li data-i18n="right_dial"><strong>Right Dial:</strong> Temperature adjustment (°C).</li>
+                        <li class="text-amber-700"><em data-i18n="timer_note">Note: The timer emits a sound but does not turn off the oven automatically.</em></li>
+                    </ul>
+                    <div class="mt-auto pt-6 h-[200px] overflow-hidden rounded-xl">
+                        <img src="images/oven.jpg" data-gallery loading="lazy" decoding="async" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition">
+                    </div>
+                </div>
+
+                <!-- Washing Machine -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-sand-200 flex flex-col">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-soap"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900" data-i18n="washing_machine">Washing Machine</h4>
+                            <span class="text-xs text-stone-500" data-i18n="location_laundry">Laundry Room</span>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-stone-600 space-y-2 list-disc list-inside leading-relaxed">
+                        <li data-i18n="load_laundry">Load laundry into the drum and close the door.</li>
+                        <li data-i18n="add_detergent">Add detergent to the <strong>left drawer compartment</strong>.</li>
+                        <li data-i18n="select_program">Select program dial & press <strong>Start</strong>.</li>
+                    </ul>
+                    <div class="mt-auto pt-6 h-[200px] overflow-hidden rounded-xl">
+                        <img src="images/washing_machine.jpg" data-gallery loading="lazy" decoding="async" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition">
+                    </div>
+                </div>
+
+                <!-- Doorbell & Intercom -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-sand-200 flex flex-col">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900" data-i18n="doorbell_intercom">Doorbell Monitor & Lock</h4>
+                            <span class="text-xs text-stone-500" data-i18n="location_entrance">Entrance / Electrical Panel</span>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-stone-600 space-y-2 list-disc list-inside leading-relaxed">
+                        <li data-i18n="doorbell_location">Located near the main electrical panel.</li>
+                        <li data-i18n="doorbell_camera">Press the <strong>top right orange button</strong> to view outdoor camera.</li>
+                        <li data-i18n="doorbell_remote">Tap screen key icon (<i class="fa-solid fa-key"></i>) to unlock door remotely.</li>
+                        <li data-i18n="doorbell_manual">Manual unlock button is located in the center of the door lock.</li>
+                    </ul>
+                    <div class="mt-auto pt-6 h-[200px] overflow-hidden rounded-xl">
+                        <img src="images/doorbell/campainha.jpg" data-gallery="doorbell" loading="lazy" decoding="async" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition">
+                    </div>
+                </div>
+
+                <!-- Coffee Machine -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-sand-200 flex flex-col">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-soap"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900" data-i18n="coffee_machine">Coffee Machine</h4>
+                            <span class="text-xs text-stone-500" data-i18n="location_kitchen">Kitchen</span>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-stone-600 space-y-2 list-disc list-inside leading-relaxed">
+                        <li data-i18n="machine_on">Turn on the machine by holding down the two top buttons for a few seconds. Lights will blink while the machine heats up.</li>
+                        <li data-i18n="add_water">Add water to the reservoir.</li>
+                        <li data-i18n="load_capsule">Load a coffee capsule by lifting the lever and inserting the capsule in the same orientation indicated by the shape on top.</li>
+                        <li data-i18n="select_brew">Select the small cup for a short espresso or the large cup for a slightly longer espresso.</li>
+                        <li data-i18n="enjoy">Enjoy your coffee!</li>
+                    </ul>
+                    <div class="mt-auto pt-6 h-[200px] overflow-hidden rounded-xl">
+                        <img src="images/coffee_machine.jpg" data-gallery loading="lazy" decoding="async" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. SAFETY & ECO TAB -->
+        <section id="content-safety" class="tab-content hidden space-y-8">
+            <div class="border-b border-sand-200 pb-4">
+                <h3 class="text-2xl font-bold text-gray-900" data-i18n="safety-heading">Safety, Emergencies & Eco Practices</h3>
+                <p class="text-stone-600 text-sm" data-i18n="safety-sub">Important safety locations and our sustainability tips.</p>
+            </div>
+
+            <!-- Drinking water notice -->
+            <div class="flex items-start gap-4 bg-sky-50 border border-sky-200 rounded-2xl p-5">
+                <span class="w-12 h-12 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center text-xl flex-shrink-0"><i class="fa-solid fa-faucet-drip"></i></span>
+                <div>
+                    <h4 class="font-bold text-sky-900" data-i18n="water_safe_title">Tap Water is Safe to Drink</h4>
+                    <p class="text-sm text-sky-800 mt-1 leading-relaxed" data-i18n="water_safe_desc">You can drink the tap water at the property. It is safe and helps us reduce plastic waste.</p>
+                </div>
+            </div>
+
+            <!-- Safety Items Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-5 rounded-2xl border border-sand-200 text-center flex flex-col">
+                    <div class="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-xl mx-auto mb-3">
+                        <i class="fa-solid fa-fire-extinguisher"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 text-sm" data-i18n="extinguisher_heading">Fire extinguisher</h4>
+                    <p class="text-xs text-stone-500 mt-1" data-i18n="extinguisher_location">The fire extinguisher is located behind the entrance door.</p>
+                    <div class="mt-auto pt-6 h-[200px] overflow-hidden rounded-xl">
+                        <img src="images/fire_extinguisher.jpg" data-gallery loading="lazy" decoding="async" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition">
+                    </div>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-sand-200 text-center flex flex-col">
+                    <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mx-auto mb-3">
+                        <i class="fa-solid fa-kit-medical"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 text-sm" data-i18n="aid_heading">First Aid kit</h4>
+                    <p class="text-xs text-stone-500 mt-1" data-i18n="aid_location">Located in the cabinet next to the living room sofa.</p>
+                    <div class="mt-auto pt-6 h-[200px] overflow-hidden rounded-xl">
+                        <img src="images/first_aid.jpg" data-gallery loading="lazy" decoding="async" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition">
+                    </div>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-sand-200 text-center flex flex-col">
+                    <div class="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-xl mx-auto mb-3">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 text-sm" data-i18n="electrical_heading">Eletrical panel</h4>
+                    <p class="text-xs text-stone-500 mt-1" data-i18n="eletrical_location">Labeled electrical panel right after the entrance door.</p>
+                    <div class="mt-auto pt-6 h-[200px] overflow-hidden rounded-xl">
+                        <img src="images/electrical_panel.jpg" data-gallery loading="lazy" decoding="async" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Eco Practices -->
+            <div class="bg-emerald-900 text-white rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+                <div class="relative z-10">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="bg-emerald-800 text-emerald-200 p-2 rounded-xl text-xl">🌱</span>
+                        <h4 class="text-xl font-bold" data-i18n="eco_practices_heading">Eco-friendly Practices</h4>
+                    </div>
+                    <p class="text-emerald-100 text-xs sm:text-sm mb-6 max-w-2xl" data-i18n="eco_practices_desc">Madeira Island is a natural paradise. Help us protect our environment by following these simple tips:</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                        <div class="flex items-start gap-3 bg-emerald-800/60 p-3.5 rounded-xl border border-emerald-700/50">
+                            <i class="fa-solid fa-droplet text-cyan-300 text-base mt-0.5"></i>
+                            <div>
+                                <strong class="block text-white" data-i18n="save_water_heading">Save Water</strong>
+                                <span class="text-emerald-100" data-i18n="save_water_desc">Avoid leaving taps running and enjoy short refreshing showers.</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 bg-emerald-800/60 p-3.5 rounded-xl border border-emerald-700/50">
+                            <i class="fa-solid fa-lightbulb text-amber-300 text-base mt-0.5"></i>
+                            <div>
+                                <strong class="block text-white" data-i18n="save_electricity_heading">Save Electricity</strong>
+                                <span class="text-emerald-100" data-i18n="save_electricity_desc">Turn off lights & electronics when leaving the house.</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 bg-emerald-800/60 p-3.5 rounded-xl border border-emerald-700/50">
+                            <i class="fa-solid fa-recycle text-emerald-300 text-base mt-0.5"></i>
+                            <div>
+                                <strong class="block text-white" data-i18n="residues_heading">Separate Waste</strong>
+                                <span class="text-emerald-100" data-i18n="residues_desc">Use color-coded recycling bins located in the laundry room.</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 bg-emerald-800/60 p-3.5 rounded-xl border border-emerald-700/50">
+                            <i class="fa-solid fa-trash-can text-stone-300 text-base mt-0.5"></i>
+                            <div>
+                                <strong class="block text-white" data-i18n="large_trash_heading">Large Trash Disposal</strong>
+                                <span class="text-emerald-100" data-i18n="large_trash_desc">Take large rubbish bags to the street recycling bins nearby.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-stone-600 text-sm" data-i18n="garbage_location_desc"><strong>In the following image you can find the location of the recycling bins for large trash disposal.</strong></p>
+            <div class="mt-6">
+                <img src="images/lixo.png" alt="Map showing the location of the recycling bins" loading="lazy" decoding="async" class="w-full rounded-2xl shadow-sm border border-sand-200">
+            </div>
+        </section>
+
+        <!-- 7. EXPLORE MADEIRA TAB -->
+        <section id="content-explore" class="tab-content hidden space-y-8">
+            <div class="border-b border-sand-200 pb-4">
+                <h3 class="text-2xl font-bold text-gray-900" data-i18n="explore-heading">Explore Madeira & Local Area</h3>
+                <p class="text-stone-600 text-sm" data-i18n="explore-sub">Handpicked beaches, viewpoints, restaurants, and day trips.</p>
+            </div>
+
+            <!-- Links / Guides -->
+            <div
+                class="bg-brand-50 rounded-2xl p-6 border border-brand-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                    <h4 class="font-bold text-brand-900" data-i18n="official_tourism_guide">Official Madeira Tourism Guide</h4>
+                    <p class="text-xs text-brand-700 mt-1" data-i18n="discover_official_trails">Discover official trails, levadas, and island events.</p>
+                </div>
+                <a href="https://visitmadeira.com/en/" target="_blank" rel="noopener"
+                    class="bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs px-5 py-3 rounded-xl transition shadow-sm whitespace-nowrap">
+                    <span data-i18n="official_website_visit">Visit Madeira Official Website</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                </a>
+            </div>
+            <div
+                class="bg-brand-50 rounded-2xl p-6 border border-brand-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                    <h4 class="font-bold text-brand-900" data-i18n="hiking_guide">WALKME - The n.1 hiking guide from Madeira</h4>
+                    <p class="text-xs text-brand-700 mt-1" data-i18n="hiking_desc">Find the next trails, get real-time alerts, offline access and stay safe.</p>
+                    <p class="text-xs text-brand-700 mt-1" data-i18n="promo_code">Use the promo code: <strong>WALKMEAL30</strong> and get a discount!</p>
+                </div>
+                <a href="https://walkmeguide.com/en" target="_blank" rel="noopener"
+                    class="bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs px-5 py-3 rounded-xl transition shadow-sm whitespace-nowrap">
+                    <span data-i18n="official_website_walkme">Visit WALKME Official Website</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                </a>
+            </div>
+
+            <!-- Category Cards -->
+            <div class="space-y-8">
+                <!-- Beaches Section -->
+                <div>
+                    <h4 class="font-bold text-lg text-gray-900 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-umbrella-beach text-amber-500"></i>
+                        <span data-i18n="beach_recommended">Recommended Beaches</span>
+                    </h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <a href="https://maps.app.goo.gl/hyXhc4nZLURr1ox7A" target="_blank" class="block">
+                            <div class="bg-white p-4 rounded-xl border border-sand-200 shadow-sm">
+                                <h5 class="font-bold text-gray-800 text-sm">Praia do Vigário</h5>
+                                <p class="text-xs text-stone-500 mt-0.5" data-i18n="pebble_beach">Câmara de Lobos • Pebble beach</p>
+                            </div>
+                        </a>
+                        <a href="https://maps.app.goo.gl/T971U1JA99H3SP4u6" target="_blank" class="block">
+                            <div class="bg-white p-4 rounded-xl border border-sand-200 shadow-sm">
+                                <h5 class="font-bold text-gray-800 text-sm">Fajã do Cabo Girão</h5>
+                                <p class="text-xs text-stone-500 mt-0.5" data-i18n="cable_car_required">Cable car required • Quiet location</p>
+                            </div>
+                        </a>
+                        <a href="https://maps.app.goo.gl/cC5goceag3NzZ7eF6" target="_blank" class="block">
+                            <div class="bg-white p-4 rounded-xl border border-sand-200 shadow-sm">
+                                <h5 class="font-bold text-gray-800 text-sm">Fajã dos Padres + Restaurant</h5>
+                                <p class="text-xs text-stone-500 mt-0.5" data-i18n="cable_car_access">Access via cable car • Advance booking recommended</p>
+                            </div>
+                        </a>
+                        <a href="https://maps.app.goo.gl/dqJCLxcMWfMiQFLX8" target="_blank" class="block">
+                            <div class="bg-white p-4 rounded-xl border border-sand-200 shadow-sm">
+                                <h5 class="font-bold text-gray-800 text-sm">Praia Formosa</h5>
+                                <p class="text-xs text-stone-500 mt-0.5" data-i18n="formosa_beach">Funchal • Black sand & pebble beach</p>
+                            </div>
+                        </a>
+                        <a href="https://maps.app.goo.gl/MsrABUPJPZz59Wdt8" target="_blank" class="block">
+                            <div class="bg-white p-4 rounded-xl border border-sand-200 shadow-sm">
+                                <h5 class="font-bold text-gray-800 text-sm">Complexo Balnear do Lido</h5>
+                                <p class="text-xs text-stone-500 mt-0.5" data-i18n="lido_beach">Funchal • Natural pools & amenities</p>
+                            </div>
+                        </a>
+                        <a href="https://maps.app.goo.gl/ck6MY5N2tCbsH4dx6" target="_blank" class="block">
+                            <div class="bg-white p-4 rounded-xl border border-sand-200 shadow-sm">
+                                <h5 class="font-bold text-gray-800 text-sm">Praia da Calheta</h5>
+                                <p class="text-xs text-stone-500 mt-0.5" data-i18n="golden_sand_beaches">Golden sand beaches</p>
+                            </div>
+                        </a>
+                        <a href="https://maps.app.goo.gl/VCc6TAVzfu7nQXCD8" target="_blank" class="block">
+                            <div class="bg-white p-4 rounded-xl border border-sand-200 shadow-sm">
+                                <h5 class="font-bold text-gray-800 text-sm">Praia de Machico</h5>
+                                <p class="text-xs text-stone-500 mt-0.5" data-i18n="golden_sand_beaches">Golden sand beaches</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Viewpoints Section -->
+                <div>
+                    <h4 class="font-bold text-lg text-gray-900 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-mountain text-brand-600"></i>
+                        <span data-i18n="scenic_viewpoints_title">Scenic Viewpoints</span>
+                    </h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <a href="https://maps.app.goo.gl/herCh4EDtZgUrQth8" target="_blank" class="block">
+                            <div class="bg-white p-4 rounded-xl border border-sand-200 h-full flex flex-col">
+                                <h5 class="font-bold text-gray-800 text-sm">Pico da Torre</h5>
+                                <p class="text-xs text-stone-500 mt-1" data-i18n="pico_da_torre">Boot-shaped view of Câmara de Lobos marina.</p>
+                            </div>
+                        </a>
+                        <a href="https://maps.app.goo.gl/Spf27CReyNud2uJ56" target="_blank" class="block">
+                            <div class="bg-white p-4 rounded-xl border border-sand-200 h-full flex flex-col">
+                                <h5 class="font-bold text-gray-800 text-sm">Cabo Girão Skywalk</h5>
+                                <p class="text-xs text-stone-500 mt-1" data-i18n="cabo_girao_skywalk">One of Europe's highest sea cliffs (580m).</p>
+                            </div>
+                        </a>
+                        <a href="https://maps.app.goo.gl/MEqMURC4xNBcLv2G9" target="_blank" class="block">
+                            <div class="bg-white p-4 rounded-xl border border-sand-200 h-full flex flex-col">
+                                <h5 class="font-bold text-gray-800 text-sm">Eira do Serrado</h5>
+                                <p class="text-xs text-stone-500 mt-1" data-i18n="eira_do_serrado">Panoramic view over Curral das Freiras valley.</p>
+                            </div>
+                        </a>
+                        <a href="https://maps.app.goo.gl/NU5Pv6xynAa9fX2J8" target="_blank" class="block">
+                            <div class="bg-white p-4 rounded-xl border border-sand-200 h-full flex flex-col">
+                                <h5 class="font-bold text-gray-800 text-sm">Boca da Corrida</h5>
+                                <p class="text-xs text-stone-500 mt-1" data-i18n="boca_da_corrida">Stunning mountain and ocean vistas.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Restaurants Section -->
+                <div class="bg-white rounded-2xl p-6 border border-sand-200 shadow-sm">
+                    <h4 class="font-bold text-lg text-gray-900 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-utensils text-red-500"></i>
+                        <span data-i18n="gastronomy_restaurants_title">Gastronomy & Local "Espetada" Restaurants</span>
+                    </h4>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-brand-600 uppercase tracking-wider" data-i18n="traditional_beef_skewers">Traditional Beef Skewers (Espetada):</span>
+                                <span class="text-xs font-semibold bg-brand-50 text-brand-700 px-2 py-0.5 rounded-full">5</span>
+                            </div>
+                            <div class="space-y-2.5">
+                                <a href="https://maps.app.goo.gl/zYULFV2ZkErDRxQj6" target="_blank" class="group flex items-center gap-3 p-3 rounded-xl border border-sand-200 bg-sand-50/50 hover:bg-white hover:border-brand-500 hover:shadow-md hover:-translate-y-0.5 transition">
+                                    <span class="w-11 h-11 rounded-xl bg-red-50 text-red-600 flex items-center justify-center text-lg flex-shrink-0"><i class="fa-solid fa-fire"></i></span>
+                                    <span class="min-w-0">
+                                        <h5 class="font-bold text-gray-900 text-sm sm:text-base leading-tight">O Polar</h5>
+                                        <p class="text-xs text-stone-500 mt-0.5">Espetada</p>
+                                    </span>
+                                    <i class="fa-solid fa-location-dot text-stone-300 group-hover:text-brand-600 transition ml-auto pl-2"></i>
+                                </a>
+                                <a href="https://maps.app.goo.gl/JTTaAUq8BYLr7qbm6" target="_blank" class="group flex items-center gap-3 p-3 rounded-xl border border-sand-200 bg-sand-50/50 hover:bg-white hover:border-brand-500 hover:shadow-md hover:-translate-y-0.5 transition">
+                                    <span class="w-11 h-11 rounded-xl bg-red-50 text-red-600 flex items-center justify-center text-lg flex-shrink-0"><i class="fa-solid fa-fire"></i></span>
+                                    <span class="min-w-0">
+                                        <h5 class="font-bold text-gray-900 text-sm sm:text-base leading-tight">Santo António</h5>
+                                        <p class="text-xs text-stone-500 mt-0.5">Espetada</p>
+                                    </span>
+                                    <i class="fa-solid fa-location-dot text-stone-300 group-hover:text-brand-600 transition ml-auto pl-2"></i>
+                                </a>
+                                <a href="https://maps.app.goo.gl/mF9qSKxn7eEgiPZB6" target="_blank" class="group flex items-center gap-3 p-3 rounded-xl border border-sand-200 bg-sand-50/50 hover:bg-white hover:border-brand-500 hover:shadow-md hover:-translate-y-0.5 transition">
+                                    <span class="w-11 h-11 rounded-xl bg-red-50 text-red-600 flex items-center justify-center text-lg flex-shrink-0"><i class="fa-solid fa-fire"></i></span>
+                                    <span class="min-w-0">
+                                        <h5 class="font-bold text-gray-900 text-sm sm:text-base leading-tight">Miradouro da Cruz da Caldeira</h5>
+                                        <p class="text-xs text-stone-500 mt-0.5">Espetada</p>
+                                    </span>
+                                    <i class="fa-solid fa-location-dot text-stone-300 group-hover:text-brand-600 transition ml-auto pl-2"></i>
+                                </a>
+                                <a href="https://maps.app.goo.gl/ufxzxuQYERfpwpxC9" target="_blank" class="group flex items-center gap-3 p-3 rounded-xl border border-sand-200 bg-sand-50/50 hover:bg-white hover:border-brand-500 hover:shadow-md hover:-translate-y-0.5 transition">
+                                    <span class="w-11 h-11 rounded-xl bg-red-50 text-red-600 flex items-center justify-center text-lg flex-shrink-0"><i class="fa-solid fa-fire"></i></span>
+                                    <span class="min-w-0">
+                                        <h5 class="font-bold text-gray-900 text-sm sm:text-base leading-tight">Viola</h5>
+                                        <p class="text-xs text-stone-500 mt-0.5">Espetada</p>
+                                    </span>
+                                    <i class="fa-solid fa-location-dot text-stone-300 group-hover:text-brand-600 transition ml-auto pl-2"></i>
+                                </a>
+                                <a href="https://maps.app.goo.gl/94woBKPii8FvUT5F6" target="_blank" class="group flex items-center gap-3 p-3 rounded-xl border border-sand-200 bg-sand-50/50 hover:bg-white hover:border-brand-500 hover:shadow-md hover:-translate-y-0.5 transition">
+                                    <span class="w-11 h-11 rounded-xl bg-red-50 text-red-600 flex items-center justify-center text-lg flex-shrink-0"><i class="fa-solid fa-fire"></i></span>
+                                    <span class="min-w-0">
+                                        <h5 class="font-bold text-gray-900 text-sm sm:text-base leading-tight">O Lagar</h5>
+                                        <p class="text-xs text-stone-500 mt-0.5">Espetada</p>
+                                    </span>
+                                    <i class="fa-solid fa-location-dot text-stone-300 group-hover:text-brand-600 transition ml-auto pl-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-brand-600 uppercase tracking-wider" data-i18n="other_restaurants">Other Restaurants</span>
+                                <span class="text-xs font-semibold bg-brand-50 text-brand-700 px-2 py-0.5 rounded-full">5</span>
+                            </div>
+                            <div class="space-y-2.5">
+                                <a href="https://maps.app.goo.gl/krRftNPFjwQhBs4K7" target="_blank" class="group flex items-center gap-3 p-3 rounded-xl border border-sand-200 bg-sand-50/50 hover:bg-white hover:border-brand-500 hover:shadow-md hover:-translate-y-0.5 transition">
+                                    <span class="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-lg flex-shrink-0"><i class="fa-solid fa-bread-slice"></i></span>
+                                    <span class="min-w-0">
+                                        <h5 class="font-bold text-gray-900 text-sm sm:text-base leading-tight">Santa Cecília</h5>
+                                        <p class="text-xs text-stone-500 mt-0.5 leading-snug" data-i18n="santa_cecilia_desc">Great nearby spot for breakfast & pastries.</p>
+                                    </span>
+                                    <i class="fa-solid fa-location-dot text-stone-300 group-hover:text-brand-600 transition ml-auto pl-2"></i>
+                                </a>
+                                <a href="https://maps.app.goo.gl/j4LRcCts46V4B8vu5" target="_blank" class="group flex items-center gap-3 p-3 rounded-xl border border-sand-200 bg-sand-50/50 hover:bg-white hover:border-brand-500 hover:shadow-md hover:-translate-y-0.5 transition">
+                                    <span class="w-11 h-11 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center text-lg flex-shrink-0"><i class="fa-solid fa-fish"></i></span>
+                                    <span class="min-w-0">
+                                        <h5 class="font-bold text-gray-900 text-sm sm:text-base leading-tight">Deserta Pequena</h5>
+                                        <p class="text-xs text-stone-500 mt-0.5 leading-snug" data-i18n="deserta_pequena_desc">Good fine restaurant for seafood and fish.</p>
+                                    </span>
+                                    <i class="fa-solid fa-location-dot text-stone-300 group-hover:text-brand-600 transition ml-auto pl-2"></i>
+                                </a>
+                                <a href="https://maps.app.goo.gl/JMYyt9unKFRiDiUJ9" target="_blank" class="group flex items-center gap-3 p-3 rounded-xl border border-sand-200 bg-sand-50/50 hover:bg-white hover:border-brand-500 hover:shadow-md hover:-translate-y-0.5 transition">
+                                    <span class="w-11 h-11 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center text-lg flex-shrink-0"><i class="fa-solid fa-fish"></i></span>
+                                    <span class="min-w-0">
+                                        <h5 class="font-bold text-gray-900 text-sm sm:text-base leading-tight">Vila do Peixe</h5>
+                                        <p class="text-xs text-stone-500 mt-0.5 leading-snug" data-i18n="vila_do_peixe_desc">Fresh seafood in Câmara de Lobos harbor.</p>
+                                    </span>
+                                    <i class="fa-solid fa-location-dot text-stone-300 group-hover:text-brand-600 transition ml-auto pl-2"></i>
+                                </a>
+                                <a href="https://maps.app.goo.gl/5EacYdnLujyXeL8p7" target="_blank" class="group flex items-center gap-3 p-3 rounded-xl border border-sand-200 bg-sand-50/50 hover:bg-white hover:border-brand-500 hover:shadow-md hover:-translate-y-0.5 transition">
+                                    <span class="w-11 h-11 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center text-lg flex-shrink-0"><i class="fa-solid fa-drumstick-bite"></i></span>
+                                    <span class="min-w-0">
+                                        <h5 class="font-bold text-gray-900 text-sm sm:text-base leading-tight">O Pasto</h5>
+                                        <p class="text-xs text-stone-500 mt-0.5 leading-snug" data-i18n="o_pasto_desc">Known by its brazilian barbecue, several meat options.</p>
+                                    </span>
+                                    <i class="fa-solid fa-location-dot text-stone-300 group-hover:text-brand-600 transition ml-auto pl-2"></i>
+                                </a>
+                                <a href="https://maps.app.goo.gl/iSabU3m1pYvp8tGu8" target="_blank" class="group flex items-center gap-3 p-3 rounded-xl border border-sand-200 bg-sand-50/50 hover:bg-white hover:border-brand-500 hover:shadow-md hover:-translate-y-0.5 transition">
+                                    <span class="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-lg flex-shrink-0"><i class="fa-solid fa-wine-glass"></i></span>
+                                    <span class="min-w-0">
+                                        <h5 class="font-bold text-gray-900 text-sm sm:text-base leading-tight">Adega do Teixeira</h5>
+                                        <p class="text-xs text-stone-500 mt-0.5 leading-snug" data-i18n="adega_do_teixeira_desc">Traditional restaurant with typical Madeiran dishes.</p>
+                                    </span>
+                                    <i class="fa-solid fa-location-dot text-stone-300 group-hover:text-brand-600 transition ml-auto pl-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image viewer: picture fitted to the screen + the card's info -->
+        <div id="imageModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50 p-3 sm:p-6" role="dialog" aria-modal="true">
+            <div class="relative bg-white rounded-2xl shadow-2xl overflow-hidden w-full max-w-5xl max-h-[92dvh] flex flex-col md:flex-row">
+                <button id="closeModal" aria-label="Close" class="absolute top-2 right-2 z-10 w-9 h-9 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+                <div id="galleryStage" class="relative bg-stone-900 flex items-center justify-center min-w-0 md:flex-1 select-none">
+                    <img id="galleryImg" alt="" class="max-w-full max-h-[50dvh] md:max-h-[88dvh] object-contain">
+                    <div id="keypadAnim" class="hidden" aria-hidden="true">
+                        <div id="kpPad">
+                            <div id="kpDisp">
+                                <div class="slots"><span class="s">–</span><span class="s">–</span><span class="s">–</span><span class="s">–</span></div>
+                                <i class="ok fa-solid fa-lock-open"></i>
+                            </div>
+                            <div id="kpKeys">
+                                <div class="k" data-k="1">1</div><div class="k" data-k="2">2</div><div class="k" data-k="3">3</div>
+                                <div class="k" data-k="4">4</div><div class="k" data-k="5">5</div><div class="k" data-k="6">6</div>
+                                <div class="k" data-k="7">7</div><div class="k" data-k="8">8</div><div class="k" data-k="9">9</div>
+                                <div class="k dim"><i class="fa-solid fa-bell"></i></div>
+                                <div class="k" data-k="0">0</div>
+                                <div class="k key" data-k="key"><i class="fa-solid fa-key"></i></div>
+                            </div>
+                            <div id="kpHand">
+                                <svg id="kpHandIn" viewBox="0 0 56 76" width="56" height="76">
+                                    <ellipse cx="9" cy="52" rx="7" ry="12" transform="rotate(-25 9 52)" fill="#F2C9A0" stroke="#C48A5E" stroke-width="1.5"/>
+                                    <rect x="8" y="34" width="42" height="42" rx="16" fill="#F2C9A0" stroke="#C48A5E" stroke-width="1.5"/>
+                                    <path d="M36 40v9M43 42v9" stroke="#C48A5E" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                                    <rect x="20" y="2" width="15" height="46" rx="7.5" fill="#F2C9A0" stroke="#C48A5E" stroke-width="1.5"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="galleryPrev" aria-label="Previous" class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button id="galleryNext" aria-label="Next" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center"><i class="fa-solid fa-chevron-right"></i></button>
+                    <span id="galleryCount" class="absolute bottom-2 left-1/2 -translate-x-1/2 text-xs font-medium text-white bg-black/50 rounded-full px-2.5 py-1"></span>
+                </div>
+                <div id="galleryInfo" class="p-5 flex-1 min-h-0 overflow-y-auto md:flex-none md:w-80">
+                    <h4 id="galleryTitle" class="font-bold text-lg text-gray-900 pr-8 md:pr-0"></h4>
+                    <div id="galleryText" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- LEGAL & FOOTER -->
+    <footer class="bg-stone-900 text-stone-400 py-10 border-t border-stone-800 mt-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 pb-8 border-b border-stone-800 text-xs leading-relaxed">
+                <div>
+                    <h5 class="text-white font-bold text-sm mb-2">Casa dos Azevedos</h5>
+                    <p class="mb-2" data-i18n="local_accomodation">Local Accommodation License (RNAL): <strong>176349/AL</strong></p>
+                    <p data-i18n="complaint_book">A complaint book (<em>Livro de Reclamações</em>) is available on the premises and can be requested from the host at any time.</p>
+                </div>
+                <div>
+                    <h5 class="text-white font-bold text-sm mb-2" data-i18n="security_privacy">Security & Privacy</h5>
+                    <p data-i18n="security_privacy_desc">For the safety of our guests, this property is equipped with an external security camera strictly focused on the main entrance door. Footage is stored for a limited period.</p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-3 bg-stone-800/60 border border-stone-700/60 rounded-xl px-4 py-3 mb-8 text-xs leading-relaxed text-stone-300">
+                <i class="fa-solid fa-language mt-0.5 text-stone-400"></i>
+                <p data-i18n="ai_notice">The translations on this website were made entirely by AI translators. We apologize for any spelling errors or phrasing that may not be completely accurate.</p>
+            </div>
+
+            <div
+                class="flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500 gap-4 text-center sm:text-left">
+                <p>© <span id="year"></span> Casa dos Azevedos. <span data-i18n="footer_rights">All rights reserved.</span></p>
+                <p data-i18n="footer_wish">We wish you an unforgettable stay in Madeira Island!</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const $ = id => document.getElementById(id);
+
+        // Multi-image galleries. Elements with a bare data-gallery open their own image.
+        const galleries = {
+            Route_1: ["images/Route_1/Laja.jpg", "images/Route_1/levada_laja.jpg", "images/Route_1/Entrada_degraus.jpg"],
+            Route_2: ["images/Route_2/Entrada_corgo.jpg", "images/Route_2/corgo_esquina.jpg", "images/Route_2/corgo_frente.jpg", "images/Route_2/Entrada_degraus.jpg"],
+            Route_3: ["images/Route_3/Parque.jpg", "images/Route_3/Entrada_rua_torre.jpg", "images/Route_3/Descida.jpg", "images/Route_3/Laja.jpg", "images/Route_3/levada_laja.jpg", "images/Route_3/Entrada_degraus.jpg"],
+            TV: ["images/TV.jpeg", "images/Remote.jpg"],
+            doorbell: ["images/doorbell/campainha.jpg", "images/doorbell/campainha1.jpg", "images/doorbell/campainha2.jpg", "images/doorbell/campainha3.jpg"]
+        };
+
+        // English lives in the markup; only the other languages are listed here.
+        // Missing keys fall back to English.
+        const translations = {
+        pt: {
+            "hero-title": "Bem-vindo à Casa dos Azevedos",
+            "hero-subtitle": "Tudo o que precisa para uma estadia excelente. Explore o nosso guia digital com regras, funcionamento da casa e sugestões locais.",
+            "badge-checkin-lbl": "Check-in",
+            "badge-checkout-lbl": "Check-out",
+            "badge-host-lbl": "Contacto Anfitrião",
+            "tab-contacts": "Contactos",
+            "tab-access": "Acesso e Estacionamento",
+            "tab-checkin": "Check-In / Out",
+            "tab-rules": "Regras da Casa",
+            "tab-appliances": "Equipamentos",
+            "tab-safety": "Segurança e Eco",
+            "tab-explore": "Explorar Madeira",
+            "contacts-heading": "Contactos Importantes",
+            "contacts-sub": "Estamos à sua disposição durante toda a estadia.",
+            "emerg-title": "Número de Emergência: 112",
+            "emerg-call": "Ligue para 112 agora",
+            "emerg-desc": "Polícia, Ambulância e Bombeiros em Portugal.",
+            "health-heading": "Serviços de Saúde e Farmácias",
+            "medical_care": "Cuidados Médicos",
+            "emergency_hospital": "Hospital de emergência",
+            "private_care": "Cuidados Privados",
+            "pharmacy-list": "Farmácias Mais Próximas:",
+            "access-heading": "Trajetos e Estacionamento",
+            "access-sub": "Instruções passo a passo para chegar sem complicações.",
+            "parking-title": "Nota sobre Estacionamento",
+            "parking-desc": "O alojamento não dispõe de estacionamento privado, mas existem várias alternativas públicas próximas detalhadas abaixo.<br /><br /> <strong>Clique nas caixas para ver imagens do trajeto.</strong>",
+            "lightblue-title": "Rota Azul Clara",
+            "lightgreen-title": "Rota Verde Clara",
+            "walk_front": "Aproxime-se da frente da casa.",
+            "rule-quiet-title": "Horário de Silêncio",
+            "rule-quiet-desc": "Por favor, minimize o ruído durante o período noturno e respeite os nossos vizinhos.",
+            "checkout-thanks": "Desejamos-lhe uma boa viagem de regresso a casa! Boa viagem!",
+            "locate_keyboard": "Localize a tecla digital iluminada.",
+            "type_code": "Digite o código de acesso de 4 dígitos.",
+            "press_key": "Pressione o botão com o ÍCONE DA CHAVE para destrancar.",
+            "designated_parking_area": "Área de Estacionamento designada",
+            "pedestrian_footpath": "Caminho pedonal/Levada",
+            "smartlock-steps": "PASSO-A-PASSO",
+            "route-step-desc": "Siga a rota indicada para chegar à entrada da casa.",
+            "main_road": "Rua principal, João Gonçalves Zarco",
+            "parking_lot": "Lote de estacionamento",
+            "narrow_access_road": "Caminho pedonal/Levada",
+            "direct_steps": "Escadas da entrada da casa",
+            "house_entrance_stairs": "Escadas da entrada da casa",
+            "traffic-warning-title": "Nota importante sobre condução",
+            "traffic-warning-desc": "Na Rua do Alto da Torre, o trânsito é de sentido único. Embora seja legalmente possível conduzir por alguns troços azuis do percurso, não é recomendado, pois as estradas são muito estreitas. Recomendamos estacionar no parque de estacionamento designado e percorrer a curta distância a pé.",
+            "darkblue-title": "Rota Azul Escura",
+            "darkblue-desc": "Siga a rota azul escura para chegar ao estacionamento público mais próximo e à entrada da casa.",
+            "checkin-heading": "Instruções de Check-in e Check-out",
+            "checkin-sub": "Procedimento de entrada autónoma e lista de verificação de saída.",
+            "checkin-title": "Check-in",
+            "checkin-time-lbl": "Horário: A partir das 16:00",
+            "smartlock-title": "Método de fechadura digital",
+            "checkout-title": "Check-out",
+            "checkout-time-lbl": "Horário: Até às 12:00",
+            "checkout-checklist-title": "Lista de Verificação de Saída:",
+            "chk-lights": "Desligar todas as luzes e equipamentos",
+            "chk-windows": "Fechar bem todas as janelas",
+            "chk-trash": "Colocar o lixo no ponto de recolha",
+            "chk-door": "Garantir que a porta fica trancada",
+            "rules-heading": "Regras Gerais da Casa",
+            "rule-smoke-title": "Proibido fumar no interior",
+            "rule-smoke-desc": "Cigarros, E-cigs, Vapes",
+            "rule-smoke-body": "Fumar é estritamente proibido no interior. Permitido apenas ao ar livre no caminho de acesso.",
+            "rules-sub": "Por favor, cumpra estas normas para garantir uma estadia agradável.",
+            "app-heading": "Funcionamento dos Equipamentos",
+            "app-sub": "Guia rápido para utilizar os eletrodomésticos da casa.",
+            "safety-heading": "Segurança, Emergências e Práticas Eco",
+            "safety-sub": "Localização de elementos de segurança e dicas sustentáveis.",
+            "explore-heading": "Descobrir a Madeira e Enseada",
+            "rule-pets-title": "Proibido animais de estimação",
+            "rule-pets-desc": "Propriedade sem animais de estimação",
+            "rule-pets-body": "Os animais de estimação não são permitidos nas instalações, a fim de manter os padrões de higiene.",
+            "rule-party-title": "Proibido festas",
+            "rule-party-desc": "Política rigorosa",
+            "rule-party-body": "Festas não são permitidas na propriedade para garantir um ambiente tranquilo para todos os vizinhos e hóspedes.",
+            "rule-visitors-title": "Política de visitantes",
+            "rule-visitors-desc": "Informe o anfitrião sobre quaisquer visitantes não registados",
+            "rule-visitors-body": "Hóspedes não registados não são permitidos sem consentimento prévio do anfitrião (podem aplicar-se taxas).",
+            "rule-children-title": "Política de crianças",
+            "rule-children-desc": "Crianças com menos de 12 anos",
+            "rule-children-body": "Crianças com menos de 12 anos não são permitidas sem supervisão de um adulto responsável. Está disponível um berço/parque mediante pedido.",
+            "smart_TV": "Smart TV",
+            "location_tv": "Sala de estar",
+            "remote_on": "Use o controlo remoto para ligar/desligar.",
+            "netflix": "A Smart TV suporta aplicações como <strong>Netflix</strong> (utilize a sua conta pessoal).",
+            "important_personal": "<strong>Importante:</strong> Por favor, faça logout das suas contas de streaming pessoais antes da saída.",
+            "induction_hob": "Placa de Indução",
+            "press_power_button": "Pressione o <strong>botão de energia (mais à esquerda)</strong> para ligar.",
+            "select_cooking_zone": "Selecione a zona de cozedura desejada no ecrã.",
+            "adjust_heat_intensity": " Ajuste a intensidade do calor usando os símbolos <strong>“+”</strong> e <strong>“-”</strong>.",
+            "microwave": "Microondas (Kunft)",
+            "location_kitchen": "Cozinha",
+            "open_door": "Abra a porta usando o <strong>grande botão inferior</strong>.",
+            "set_heating_time": "Defina o tempo de aquecimento pressionando o <strong>ícone do relógio</strong> seguido de <strong>Iniciar</strong>.",
+            "electric_oven": "Forno Elétrico",
+            "left_dial": "<strong>Botão Esquerdo:</strong> Modo de cozimento / função.",
+            "center_dial": "<strong>Botão Central:</strong> Alerta do temporizador.",
+            "right_dial": "<strong>Botão Direito:</strong> Ajuste da temperatura (°C).",
+            "timer_note": "<em>Nota: O temporizador emite um som, mas não desliga o forno automaticamente.</em>",
+            "washing_machine": "Máquina de Lavar Roupa",
+            "location_laundry": "Lavandaria",
+            "load_laundry": "Carregue a roupa na cuba e feche a porta.",
+            "add_detergent": "Adicione detergente no <strong>compartimento esquerdo da gaveta</strong>.",
+            "select_program": "Selecione o programa no botão e pressione <strong>Iniciar</strong>.",
+            "doorbell_intercom": "Campainha e Intercomunicador",
+            "location_entrance": "Entrada / Quadro Elétrico",
+            "doorbell_location": "Localizado próximo do quadro elétrico principal (Quadro Elétrico).",
+            "doorbell_camera": "Pressione o <strong>botão laranja no canto superior direito</strong> para visualizar a câmera externa.",
+            "doorbell_remote": "Toque no ícone da chave na tela (<i class=\"fa-solid fa-key\"></i>) para destrancar a porta remotamente.",
+            "doorbell_manual": "O botão de destrancamento manual está localizado no centro da fechadura da porta.",
+            "coffee_machine": "Máquina de Café",
+            "machine_on": "Ligue a máquina mantendo premidos os dois botões superiores durante alguns segundos. As luzes piscarão enquanto a máquina aquece.",
+            "add_water": "Adicione água ao reservatório.",
+            "load_capsule": "Coloque uma cápsula de café na máquina levantando a alavanca e inserindo a cápsula na mesma orientação indicada pelo formato na parte superior.",
+            "select_brew": "Selecione a chávena pequena para um espresso curto ou a chávena grande para um espresso ligeiramente mais longo.",
+            "enjoy": "Aproveite o seu café!",
+            "extinguisher_heading": "Extintor",
+            "extinguisher_location": "Localizado atrás da porta de entrada principal e claramente sinalizado.",
+            "aid_heading": "Kit de primeiros socorros",
+            "aid_location": "Localizado no armário ao lado do sofá da sala de estar.",
+            "electrical_heading": "Quadro elétrico",
+            "eletrical_location": "Quadro elétrico rotulado próximo da porta de entrada.",
+            "water_safe_title": "A água da torneira é segura para beber",
+            "water_safe_desc": "Pode beber a água da torneira da casa. É segura e ajuda-nos a reduzir o plástico.",
+            "linen_title": "Roupa de cama e toalhas incluídas",
+            "linen_desc": "Os lençóis e as toalhas estão incluídos na sua estadia.",
+            "eco_practices_heading": "Práticas ecológicas",
+            "eco_practices_desc": "A ilha da Madeira é um paraíso natural. Ajude-nos a proteger o meio ambiente seguindo estas dicas simples:",
+            "save_water_heading": "Poupe água",
+            "save_water_desc": "Evite deixar as torneiras abertas e desfrute de duches curtos e refrescantes.",
+            "save_electricity_heading": "Poupe eletricidade",
+            "save_electricity_desc": "Desligue as luzes e aparelhos eletrônicos ao sair da casa.",
+            "residues_heading": "Separe o lixo",
+            "residues_desc": "Utilize os contentores de reciclagem indicados por cores localizados na lavandaria.",
+            "large_trash_heading": "Descarte de lixo",
+            "large_trash_desc": "Leve sacos de lixo grandes para contentor na rua mais próxima.",
+            "garbage_location_desc": "<strong>Na imagem seguinte pode encontrar a localização dos baldes de reciclagem para o descarte de lixo grande.</strong>",
+            "explore-sub": "Praias, miradouros, restaurantes de espetada e passeios recomendados.",
+            "beach_recommended": "Praias Recomendadas",
+            "pebble_beach": "Câmara de Lobos • Praia de calhau",
+            "cable_car_required": "Necessário teleférico • Local tranquilo",
+            "cable_car_access": "Acesso por teleférico • Reserva antecipada recomendada",
+            "formosa_beach": "Funchal • Praia de areia preta e calhau",
+            "lido_beach": "Funchal • Piscinas naturais e comodidades",
+            "golden_sand_beaches": "Praias de areia dourada",
+            "scenic_viewpoints_title": "Miradouros",
+            "pico_da_torre": "Vista em forma de bota da marina de Câmara de Lobos.",
+            "cabo_girao_skywalk": "Um dos penhascos mais altos da Europa (580m).",
+            "eira_do_serrado": "Vista panorâmica sobre o vale do Curral das Freiras.",
+            "boca_da_corrida": "Vistas deslumbrantes de montanha e oceano.",
+            "gastronomy_restaurants_title": "Gastronomia e Restaurantes de espetada",
+            "traditional_beef_skewers": "Espetadas Tradicionais de Carne",
+            "other_restaurants": "Outros Restaurantes",
+            "santa_cecilia_desc": "Ótimo local próximo para pequeno-almoço e pastelaria.",
+            "deserta_pequena_desc": "Bom restaurante de peixe e marisco.",
+            "vila_do_peixe_desc": "Peixe fresco no porto de Câmara de Lobos.",
+            "o_pasto_desc": "Conhecido pelo seu churrasco brasileiro, várias opções de carne.",
+            "adega_do_teixeira_desc": "Restaurante tradicional com pratos típicos da Madeira.",
+            "official_tourism_guide": "Guia Oficial de Turismo da Madeira",
+            "discover_official_trails": "Descubra trilhos oficiais, levadas e eventos da ilha.",
+            "official_website_visit": "Visite o site oficial da Madeira",
+            "hiking_guide": "WALKME - O guia de caminhadas nº 1 da Madeira",
+            "hiking_desc": "Encontre os próximos trilhos, receba alertas em tempo real, acesso offline e mantenha-se seguro.",
+            "promo_code": "Use o código promocional: <strong>WALKMEAL30</strong> e obtenha um desconto!",
+            "official_website_walkme": "Visite o site oficial da WALKME",
+            "local_accomodation": "Licença de Alojamento Local (RNAL): <strong>176349/AL</strong>",
+            "complaint_book": "Um livro de reclamações (<em>Livro de Reclamações</em>) está disponível nas instalações e pode ser solicitado ao anfitrião a qualquer momento.",
+            "security_privacy": "Segurança e Privacidade",
+            "security_privacy_desc": "Para a segurança dos nossos hóspedes, esta propriedade está equipada com uma câmara de vigilância externa focada estritamente na porta de entrada principal. As filmagens são armazenadas por um período limitado.",
+            "ai_notice": "As traduções deste website foram feitas inteiramente por tradutores de inteligência artificial. Pedimos desculpa por qualquer erro ortográfico ou expressão que não seja totalmente adequada.",
+            "footer_rights": "Todos os direitos reservados.",
+            "footer_wish": "Desejamos-lhe uma estadia inesquecível na Ilha da Madeira!"
+        },
+        es: {
+            "hero-title": "Bienvenido a Casa dos Azevedos",
+            "hero-subtitle": "Todo lo que necesita para una estancia excelente. Explore nuestra guía digital con las normas, el funcionamiento de la casa y sugerencias locales.",
+            "badge-checkin-lbl": "Check-in",
+            "badge-checkout-lbl": "Check-out",
+            "badge-host-lbl": "Contacto del anfitrión",
+            "tab-contacts": "Contactos",
+            "tab-access": "Acceso y Aparcamiento",
+            "tab-checkin": "Check-in / Check-out",
+            "tab-rules": "Normas de la Casa",
+            "tab-appliances": "Equipamiento",
+            "tab-safety": "Seguridad/Ecología",
+            "tab-explore": "Explorar Madeira",
+            "contacts-heading": "Contactos Importantes",
+            "contacts-sub": "Estamos a su disposición durante toda su estancia.",
+            "emerg-title": "Número de Emergencias: 112",
+            "emerg-call": "Llame al 112 ahora",
+            "emerg-desc": "Policía, Ambulancia y Bomberos en Portugal.",
+            "health-heading": "Servicios de Salud y Farmacias",
+            "medical_care": "Atención Médica",
+            "emergency_hospital": "Hospital de Emergencia",
+            "private_care": "Atención Privada",
+            "pharmacy-list": "Farmacias Más Cercanas:",
+            "access-heading": "Rutas y Aparcamiento",
+            "access-sub": "Instrucciones paso a paso para llegar sin complicaciones.",
+            "parking-title": "Nota sobre el Aparcamiento",
+            "parking-desc": "El alojamiento no dispone de aparcamiento privado, pero existen varias alternativas públicas cercanas detalladas a continuación.<br /><br /> <strong>Haz clic en las casillas para ver imágenes de la ruta.</strong>",
+            "lightblue-title": "Ruta Azul Claro",
+            "lightgreen-title": "Ruta Verde Claro",
+            "walk_front": "Acérquese a la parte delantera de la casa.",
+            "rule-quiet-title": "Horario de Silencio",
+            "rule-quiet-desc": "Por favor, minimice el ruido durante el horario nocturno y respete a nuestros vecinos.",
+            "checkout-thanks": "¡Le deseamos un buen viaje de regreso a casa! ¡Buen viaje!",
+            "locate_keyboard": "Localice el teclado digital iluminado.",
+            "type_code": "Introduzca el código de acceso de 4 dígitos.",
+            "press_key": "Pulse el botón con el ICONO DE LA LLAVE para desbloquear.",
+            "designated_parking_area": "Zona de Aparcamiento designada",
+            "pedestrian_footpath": "Camino peatonal/Levada",
+            "smartlock-steps": "PASO A PASO",
+            "route-step-desc": "Siga la ruta indicada para llegar a la entrada de la casa.",
+            "main_road": "Calle principal, João Gonçalves Zarco",
+            "parking_lot": "Lote de aparcamiento",
+            "narrow_access_road": "Camino peatonal/Levada",
+            "direct_steps": "Escaleras de entrada de la casa",
+            "house_entrance_stairs": "Escaleras de entrada de la casa",
+            "traffic-warning-title": "Nota importante sobre la conducción",
+            "traffic-warning-desc": "En la Rua do Alto da Torre, el tráfico es de sentido único. Aunque es legalmente posible conducir por algunos tramos azules de la ruta, no se recomienda, ya que las carreteras son muy estrechas. Recomendamos aparcar en el aparcamiento designado y recorrer a pie la corta distancia restante.",
+            "darkblue-title": "Ruta Azul Oscuro",
+            "darkblue-desc": "Siga la ruta azul oscura para llegar al aparcamiento público más cercano y a la entrada de la casa.",
+            "checkin-heading": "Instrucciones de Check-in y Check-out",
+            "checkin-sub": "Procedimiento de entrada autónoma y lista de comprobación de salida.",
+            "checkin-title": "Check-in",
+            "checkin-time-lbl": "Horario: A partir de las 16:00",
+            "smartlock-title": "Método de cerradura digital",
+            "checkout-title": "Check-out",
+            "checkout-time-lbl": "Horario: Hasta las 12:00",
+            "checkout-checklist-title": "Lista de Comprobación de Salida:",
+            "chk-lights": "Apagar todas las luces y equipos",
+            "chk-windows": "Cerrar bien todas las ventanas",
+            "chk-trash": "Depositar la basura en el punto de recogida",
+            "chk-door": "Asegurarse de que la puerta queda cerrada con llave",
+            "rules-heading": "Normas Generales de la Casa",
+            "rule-smoke-title": "Prohibido fumar en el interior",
+            "rule-smoke-desc": "Cigarrillos, cigarrillos electrónicos y vapeadores",
+            "rule-smoke-body": "Está estrictamente prohibido fumar en el interior. Solo está permitido al aire libre, en el camino de acceso.",
+            "rules-sub": "Por favor, cumpla estas normas para garantizar una estancia agradable.",
+            "app-heading": "Funcionamiento del Equipamiento",
+            "app-sub": "Guía rápida para utilizar los electrodomésticos de la casa.",
+            "safety-heading": "Seguridad, Emergencias y Prácticas Ecológicas",
+            "safety-sub": "Ubicación de los elementos de seguridad y consejos sostenibles.",
+            "explore-heading": "Descubrir Madeira y Enseada",
+            "rule-pets-title": "No se admiten mascotas",
+            "rule-pets-desc": "Propiedad sin mascotas",
+            "rule-pets-body": "No se permiten mascotas en las instalaciones para mantener los estándares de higiene.",
+            "rule-party-title": "Prohibido organizar fiestas",
+            "rule-party-desc": "Política estricta",
+            "rule-party-body": "No se permiten fiestas en la propiedad para garantizar un ambiente tranquilo para todos los vecinos y huéspedes.",
+            "rule-visitors-title": "Política de visitantes",
+            "rule-visitors-desc": "Informe al anfitrión sobre cualquier visitante no registrado",
+            "rule-visitors-body": "No se permiten huéspedes no registrados sin el consentimiento previo del anfitrión (pueden aplicarse cargos).",
+            "rule-children-title": "Política sobre niños",
+            "rule-children-desc": "Niños menores de 12 años",
+            "rule-children-body": "Los niños menores de 12 años no están permitidos sin la supervisión de un adulto responsable. Hay disponible una cuna/parque infantil bajo petición.",
+            "smart_TV": "Smart TV",
+            "location_tv": "Sala de estar",
+            "remote_on": "Utilice el mando a distancia para encender/apagar.",
+            "netflix": "La Smart TV admite aplicaciones como <strong>Netflix</strong> (utilice su cuenta personal).",
+            "important_personal": "<strong>Importante:</strong> Por favor, cierre sesión en sus cuentas personales de streaming antes de la salida.",
+            "induction_hob": "Placa de Inducción",
+            "press_power_button": "Pulse el <strong>botón de encendido (el situado más a la izquierda)</strong> para encenderla.",
+            "select_cooking_zone": "Seleccione la zona de cocción deseada en la pantalla.",
+            "adjust_heat_intensity": " Ajuste la intensidad del calor utilizando los símbolos <strong>“+”</strong> y <strong>“-”</strong>.",
+            "microwave": "Microondas (Kunft)",
+            "location_kitchen": "Cocina",
+            "open_door": "Abra la puerta utilizando el <strong>botón grande inferior</strong>.",
+            "set_heating_time": "Ajuste el tiempo de calentamiento pulsando el <strong>icono del reloj</strong> seguido de <strong>Iniciar</strong>.",
+            "electric_oven": "Horno Eléctrico",
+            "left_dial": "<strong>Botón Izquierdo:</strong> Modo de cocción / función.",
+            "center_dial": "<strong>Botón Central:</strong> Aviso del temporizador.",
+            "right_dial": "<strong>Botón Derecho:</strong> Ajuste de la temperatura (°C).",
+            "timer_note": "<em>Nota: El temporizador emite un sonido, pero no apaga el horno automáticamente.</em>",
+            "washing_machine": "Lavadora",
+            "location_laundry": "Lavandería",
+            "load_laundry": "Introduzca la ropa en el tambor y cierre la puerta.",
+            "add_detergent": "Añada detergente en el <strong>compartimento izquierdo del cajetín</strong>.",
+            "select_program": "Seleccione el programa con el botón y pulse <strong>Iniciar</strong>.",
+            "doorbell_intercom": "Timbre e Interfono",
+            "location_entrance": "Entrada / Cuadro Eléctrico",
+            "doorbell_location": "Situado cerca del cuadro eléctrico principal (Cuadro Eléctrico).",
+            "doorbell_camera": "Pulse el <strong>botón naranja situado en la esquina superior derecha</strong> para visualizar la cámara exterior.",
+            "doorbell_remote": "Toque el icono de la llave en la pantalla (<i class=\"fa-solid fa-key\"></i>) para desbloquear la puerta a distancia.",
+            "doorbell_manual": "El botón de desbloqueo manual está situado en el centro de la cerradura de la puerta.",
+            "coffee_machine": "Cafetera",
+            "machine_on": "Encienda la máquina manteniendo pulsados los dos botones superiores durante unos segundos. Las luces parpadearán mientras la máquina se calienta.",
+            "add_water": "Añada agua al depósito.",
+            "load_capsule": "Coloque una cápsula de café en la máquina levantando la palanca e insertando la cápsula en la misma orientación indicada por la forma en la parte superior.",
+            "select_brew": "Seleccione la taza pequeña para un espresso corto o la taza grande para un espresso ligeramente más largo.",
+            "enjoy": "¡Disfrute de su café!",
+            "extinguisher_heading": "Extintor",
+            "extinguisher_location": "Situado detrás de la puerta principal de entrada y claramente señalizado.",
+            "aid_heading": "Botiquín de primeros auxilios",
+            "aid_location": "Situado en el armario junto al sofá de la sala de estar.",
+            "electrical_heading": "Cuadro Eléctrico",
+            "eletrical_location": "Cuadro eléctrico etiquetado cerca de la puerta de entrada.",
+            "water_safe_title": "El agua del grifo es segura para beber",
+            "water_safe_desc": "Puede beber el agua del grifo de la casa. Es segura y nos ayuda a reducir el plástico.",
+            "linen_title": "Ropa de cama y toallas incluidas",
+            "linen_desc": "Las sábanas y las toallas están incluidas en su estancia.",
+            "eco_practices_heading": "Prácticas Ecológicas",
+            "eco_practices_desc": "La isla de Madeira es un paraíso natural. Ayúdenos a proteger el medio ambiente siguiendo estos sencillos consejos:",
+            "save_water_heading": "Ahorre agua",
+            "save_water_desc": "Evite dejar los grifos abiertos y disfrute de duchas cortas y refrescantes.",
+            "save_electricity_heading": "Ahorre electricidad",
+            "save_electricity_desc": "Apague las luces y los aparatos electrónicos al salir de la casa.",
+            "residues_heading": "Separe la basura",
+            "residues_desc": "Utilice los contenedores de reciclaje indicados por colores situados en la lavandería.",
+            "large_trash_heading": "Eliminación de residuos",
+            "large_trash_desc": "Lleve las bolsas de basura grandes al contenedor situado en la calle más cercana.",
+            "garbage_location_desc": "<strong>En la siguiente imagen puede encontrar la ubicación de los contenedores de reciclaje para la eliminación de residuos grandes.</strong>",
+            "explore-sub": "Playas, miradores, restaurantes de espetada y paseos recomendados.",
+            "beach_recommended": "Playas Recomendadas",
+            "pebble_beach": "Câmara de Lobos • Playa de guijarros",
+            "cable_car_required": "Se necesita teleférico • Lugar tranquilo",
+            "cable_car_access": "Acceso en teleférico • Se recomienda reservar con antelación",
+            "formosa_beach": "Funchal • Playa de arena negra y guijarros",
+            "lido_beach": "Funchal • Piscinas naturales y servicios",
+            "golden_sand_beaches": "Playas de arena dorada",
+            "scenic_viewpoints_title": "Miradores",
+            "pico_da_torre": "Vista en forma de bota del puerto deportivo de Câmara de Lobos.",
+            "cabo_girao_skywalk": "Uno de los acantilados más altos de Europa (580 m).",
+            "eira_do_serrado": "Vista panorámica sobre el valle de Curral das Freiras.",
+            "boca_da_corrida": "Impresionantes vistas de las montañas y el océano.",
+            "gastronomy_restaurants_title": "Gastronomía y Restaurantes de Espetada",
+            "traditional_beef_skewers": "Espetadas Tradicionales de Carne",
+            "other_restaurants": "Otros Restaurantes",
+            "santa_cecilia_desc": "Excelente lugar cercano para desayunar y disfrutar de pastelería.",
+            "deserta_pequena_desc": "Buen restaurante de pescado y marisco.",
+            "vila_do_peixe_desc": "Pescado fresco en el puerto de Câmara de Lobos.",
+            "o_pasto_desc": "Conocido por su barbacoa brasileña y sus diversas opciones de carne.",
+            "adega_do_teixeira_desc": "Restaurante tradicional con platos típicos de Madeira.",
+            "official_tourism_guide": "Guía Oficial de Turismo de Madeira",
+            "discover_official_trails": "Descubra senderos oficiales, levadas y eventos de la isla.",
+            "official_website_visit": "Visite el sitio web oficial de Madeira",
+            "hiking_guide": "WALKME - La guía de senderismo nº 1 de Madeira",
+            "hiking_desc": "Encuentre los próximos senderos, reciba alertas en tiempo real, acceda sin conexión y manténgase seguro.",
+            "promo_code": "Utilice el código promocional: <strong>WALKMEAL30</strong> y obtenga un descuento.",
+            "official_website_walkme": "Visite el sitio web oficial de WALKME",
+            "local_accomodation": "Licencia de Alojamiento Local (RNAL): <strong>176349/AL</strong>",
+            "complaint_book": "Un libro de reclamaciones (<em>Livro de Reclamações</em>) está disponible en las instalaciones y puede solicitarse al anfitrión en cualquier momento.",
+            "security_privacy": "Seguridad y Privacidad",
+            "security_privacy_desc": "Para la seguridad de nuestros huéspedes, esta propiedad está equipada con una cámara de vigilancia externa enfocada estrictamente en la puerta de entrada principal. Las grabaciones se almacenan durante un período limitado.",
+            "ai_notice": "Las traducciones de este sitio web han sido realizadas íntegramente por traductores de inteligencia artificial. Pedimos disculpas por cualquier error ortográfico o expresión que no sea del todo adecuada.",
+            "footer_rights": "Todos los derechos reservados.",
+            "footer_wish": "¡Le deseamos una estancia inolvidable en la isla de Madeira!"
+        },
+        fr: {
+            "hero-title": "Bienvenue à la Casa dos Azevedos",
+            "hero-subtitle": "Tout ce dont vous avez besoin pour un séjour agréable. Consultez notre guide numérique pour les règles de la maison et conseils locaux.",
+            "badge-checkin-lbl": "Arrivée",
+            "badge-checkout-lbl": "Départ",
+            "badge-host-lbl": "Hôte",
+            "tab-contacts": "Contacts",
+            "tab-access": "Accès et Parking",
+            "tab-checkin": "Arrivée / Départ",
+            "tab-rules": "Règles",
+            "tab-appliances": "Équipements",
+            "tab-safety": "Sécurité et Éco",
+            "tab-explore": "Explorer Madeira",
+            "contacts-heading": "Contacts Importants",
+            "contacts-sub": "Nous sommes à votre disposition tout au long de votre séjour.",
+            "emerg-title": "Numéro d'urgence: 112",
+            "emerg-call": "Appelez le 112 maintenant",
+            "emerg-desc": "Police, ambulance et pompiers au Portugal.",
+            "health-heading": "Services de Santé et Pharmacies",
+            "medical_care": "Soins Médicaux",
+            "emergency_hospital": "Hôpital d'Urgence",
+            "private_care": "Soins Privés",
+            "pharmacy-list": "Pharmacies les plus proches:",
+            "access-heading": "Accès et Stationnement",
+            "rule-quiet-title": "Heures de Silence",
+            "rule-quiet-desc": "Veuillez minimiser le bruit pendant les heures nocturnes et respecter nos voisins.",
+            "checkout-thanks": "Nous vous souhaitons un bon retour à la maison! Bon voyage!",
+            "access-sub": "Instructions étape par étape pour arriver sans encombre.",
+            "parking-title": "Remarque sur le stationnement",
+            "parking-desc": "L'établissement ne dispose pas de parking privé, mais des options publiques sont disponibles à proximité.<br /><br /> <strong>Cliquez sur les cases pour voir les images de l'itinéraire.</strong>",
+            "lightblue-title": "Itinéraire Bleu Clair",
+            "lightgreen-title": "Itinéraire Vert Clair",
+            "smartlock-steps": "ÉTAPE PAR ÉTAPE",
+            "designated_parking_area": "Zone de stationnement désignée",
+            "pedestrian_footpath": "Sentier piéton / Levada",
+            "house_entrance_stairs": "Escaliers menant à la maison",
+            "traffic-warning-title": "Remarque importante sur la conduite",
+            "traffic-warning-desc": "Sur la Rua do Alto da Torre, la circulation se fait à sens unique. Bien qu’il soit légalement possible de circuler sur certains tronçons bleus de l’itinéraire, cela n’est pas recommandé, car les routes sont très étroites. Nous vous recommandons de vous garer sur le parking désigné et de parcourir le court trajet à pied.",
+            "route-step-desc": "Suivez l’itinéraire indiqué pour accéder à l’entrée de la maison.",
+            "main_road": "Route principale, João Gonçalves Zarco",
+            "parking_lot": "Parc de stationnement",
+            "narrow_access_road": "Sentier piéton / Levada",
+            "direct_steps": "Escaliers menant à la maison",
+            "darkblue-desc": "Suivez l'itinéraire bleu foncé pour atteindre le parking public le plus proche et l'entrée de la maison.",
+            "darkblue-title": "Itinéraire Bleu Foncé",
+            "checkin-heading": "Instructions d'arrivée et de départ",
+            "checkin-sub": "Procédure d'arrivée autonome et liste de départ.",
+            "checkin-title": "Arrivée (Check-in)",
+            "checkin-time-lbl": "Horaire: À partir de 16h00",
+            "smartlock-title": "Serrure électronique",
+            "checkout-title": "Départ (Check-out)",
+            "checkout-time-lbl": "Horaire: Jusqu'à 12h00",
+            "walk_front": "Marchez vers l'avant de la maison.",
+            "locate_keyboard": "Localisez le clavier numérique illuminé.",
+            "type_code": "Entrez le code d'accès à 4 chiffres fourni par l'hôte.",
+            "press_key": "Appuyez sur le bouton ICÔNE CLÉ pour déverrouiller la porte.",
+            "checkout-checklist-title": "Liste de contrôle de départ:",
+            "chk-lights": "Éteindre toutes les lumières et appareils",
+            "chk-windows": "Fermer toutes les fenêtres",
+            "chk-trash": "Déposer les ordures aux conteneurs",
+            "chk-door": "S'assurer que la porte est bien verrouillée",
+            "rules-heading": "Règlement Intérieur",
+            "rules-sub": "Merci de respecter ces consignes pour un séjour agréable.",
+            "app-heading": "Utilisation des Équipements",
+            "app-sub": "Guide rapide pour faire fonctionner les appareils ménagers.",
+            "safety-heading": "Sécurité et Éco-Responsabilité",
+            "safety-sub": "Consignes de sécurité et conseils écologiques.",
+            "explore-heading": "Explorer Madeira et Environs",
+            "rule-smoke-title": "Interdiction de fumer à l'intérieur",
+            "rule-smoke-desc": "Cigarettes, E-cigarettes, Vapoteuses",
+            "rule-smoke-body": "Il est strictement interdit de fumer à l'intérieur. Autorisé uniquement à l'extérieur sur le chemin d'accès.",
+            "rule-pets-title": "Animaux domestiques interdits",
+            "rule-pets-desc": "Propriété sans animaux domestiques",
+            "rule-pets-body": "Les animaux domestiques ne sont pas autorisés dans la propriété afin de maintenir les normes d'hygiène.",
+            "rule-party-title": "Fêtes interdites",
+            "rule-party-desc": "Politique stricte",
+            "rule-party-body": "Les fêtes ne sont pas autorisées dans la propriété afin de garantir un environnement paisible pour tous les voisins et invités.",
+            "rule-visitors-title": "Politique des visiteurs",
+            "rule-visitors-desc": "Informez l'hôte de tout visiteur non enregistré",
+            "rule-visitors-body": "Les invités non enregistrés ne sont pas autorisés sans le consentement préalable de l'hôte (des frais peuvent s'appliquer).",
+            "rule-children-title": "Politique pour les enfants",
+            "rule-children-desc": "Les enfants de moins de 12 ans",
+            "rule-children-body": "Les enfants de moins de 12 ans ne sont pas autorisés sans la supervision d'un adulte. Un lit bébé est disponible sur demande.",
+            "smart_TV": "Smart TV",
+            "location_tv": "Salon",
+            "remote_on": "Appuyez sur le bouton <strong>Power</strong> pour allumer la télévision.",
+            "netflix": "Le Smart TV prend en charge des applications telles que <strong>Netflix</strong> (utilisez votre compte personnel).",
+            "important_personal": "<strong>Important:</strong> Veuillez vous déconnecter de vos comptes de streaming personnels avant votre départ.",
+            "induction_hob": "Plaque de cuisson à induction",
+            "press_power_button": "Appuyez sur le <strong>bouton d'alimentation (le plus à gauche)</strong> pour allumer.",
+            "select_cooking_zone": "Sélectionnez la zone de cuisson souhaitée sur l'écran.",
+            "adjust_heat_intensity": "Réglez l'intensité de la chaleur à l'aide des symboles <strong>“+”</strong> et <strong>“-”</strong>.",
+            "microwave": "Micro-ondes",
+            "location_kitchen": "Cuisine",
+            "open_door": "Ouvrez la porte en utilisant le <strong>grand bouton inférieur</strong>.",
+            "set_heating_time": "Réglez le temps de chauffage en appuyant sur l'<strong>icône d'horloge</strong> puis sur <strong>Démarrer</strong>.",
+            "electric_oven": "Four électrique",
+            "left_dial": "<strong>Bouton de gauche:</strong> Mode de cuisson / fonction.",
+            "center_dial": "<strong>Bouton central:</strong> Alerte du minuteur.",
+            "right_dial": "<strong>Bouton de droite:</strong> Réglage de la température (°C).",
+            "timer_note": "Remarque: Le minuteur émet un son mais n'éteint pas automatiquement le four.",
+            "washing_machine": "Machine à laver",
+            "location_laundry": "Chambre de lavage",
+            "load_laundry": "Mettez le linge dans le tambour et fermez la porte.",
+            "add_detergent": "Ajoutez du détergent dans le <strong> compartiment de la porte gauche</strong>.",
+            "select_program": "Sélectionnez le programme sur le cadran et appuyez sur <strong>Démarrer</strong>.",
+            "doorbell_intercom": "Moniteur de sonnette et serrure",
+            "location_entrance": "Entrée / Panneau électrique",
+            "doorbell_location": "Situé près du panneau électrique principal.",
+            "doorbell_camera": "Appuyez sur le <strong>bouton orange en haut à droite</strong> pour voir la caméra extérieure.",
+            "doorbell_remote": "Appuyez sur l'icône de clé (<i class=\"fa-solid fa-key\"></i>) à l'écran pour déverrouiller la porte à distance.",
+            "doorbell_manual": "Le bouton de déverrouillage manuel est situé au centre de la serrure de la porte.",
+            "coffee_machine": "Machine à café",
+            "machine_on": "Allumez la machine en maintenant enfoncés les deux boutons supérieurs pendant quelques secondes. Les voyants clignoteront pendant que la machine chauffe.",
+            "add_water": "Ajoutez de l'eau dans le réservoir.",
+            "load_capsule": "Insérez une capsule de café en levant le levier et en insérant la capsule dans la même orientation que celle indiquée par la forme sur le dessus.",
+            "select_brew": "Sélectionnez la tasse petite pour un espresso court ou la tasse grande pour un espresso légèrement plus long.",
+            "enjoy": "Profitez de votre café!",
+            "extinguisher_heading": "Extincteur",
+            "extinguisher_location": "L'extincteur est situé derrière la porte d'entrée.",
+            "aid_heading": "Trousse de premiers secours",
+            "aid_location": "Située dans l'armoire à côté du canapé du salon.",
+            "electrical_heading": "Panneau électrique",
+            "eletrical_location": "Panneau électrique étiqueté juste après la porte d'entrée.",
+            "water_safe_title": "L'eau du robinet est potable",
+            "water_safe_desc": "Vous pouvez boire l'eau du robinet du logement. Elle est sûre et nous aide à réduire le plastique.",
+            "linen_title": "Linge de lit et serviettes inclus",
+            "linen_desc": "Les draps et les serviettes sont inclus dans votre séjour.",
+            "eco_practices_heading": "Pratiques Écologiques",
+            "eco_practices_desc": "L'île de Madeira est un paradis naturel. Aidez-nous à protéger notre environnement en suivant ces conseils simples:",
+            "save_water_heading": "Économiser l'eau",
+            "save_water_desc": "Évitez de laisser les robinets ouverts et profitez de douches courtes et rafraîchissantes.",
+            "save_electricity_heading": "Économiser l'électricité",
+            "save_electricity_desc": "Éteignez les lumières et les appareils électroniques lorsque vous quittez la maison.",
+            "residues_heading": "Séparer les déchets",
+            "residues_desc": "Utilisez les bacs de recyclage codés par couleur situés dans la buanderie.",
+            "large_trash_heading": "Élimination des gros déchets",
+            "large_trash_desc": "Déposez les gros sacs poubelles dans les conteneurs de recyclage de la rue à proximité.",
+            "garbage_location_desc": "<strong>Dans l'image suivante, vous pouvez trouver l'emplacement des bacs de recyclage pour l'élimination des gros déchets.</strong>",
+            "explore-sub": "Plages, points de vue et restaurants recommandés.",
+            "beach_recommended": "Plages recommandées",
+            "pebble_beach": "Câmara de Lobos • Plage de galets",
+            "cable_car_required": "Téléphérique requis • Emplacement calme",
+            "cable_car_access": "Accès par téléphérique • Réservation à l'avance recommandée",
+            "formosa_beach": "Funchal • Plage de sable noir et de galets",
+            "lido_beach": "Funchal • Piscines naturelles et commodités",
+            "golden_sand_beaches": "Plages de sable doré",
+            "scenic_viewpoints_title": "Points de vue panoramiques",
+            "pico_da_torre": "Vue en forme de botte sur la marina de Câmara de Lobos.",
+            "cabo_girao_skywalk": "L'une des falaises maritimes les plus hautes d'Europe (580 m).",
+            "eira_do_serrado": "Vue panoramique sur la vallée du Curral das Freiras.",
+            "boca_da_corrida": "Vues à couper le souffle sur la montagne et l'océan.",
+            "gastronomy_restaurants_title": "Gastronomie et Restaurants d'Espetada",
+            "traditional_beef_skewers": "Espetadas de bœuf traditionnelles",
+            "other_restaurants": "Autres Restaurants",
+            "santa_cecilia_desc": "Super endroit à proximité pour le petit-déjeuner et la pâtisserie.",
+            "deserta_pequena_desc": "Bon restaurant de fruits de mer et de poisson.",
+            "vila_do_peixe_desc": "Fruits de mer frais dans le port de Câmara de Lobos.",
+            "o_pasto_desc": "Connu pour son barbecue brésilien, plusieurs options de viande.",
+            "adega_do_teixeira_desc": "Restaurant traditionnel avec des plats typiques de Madeira.",
+            "official_tourism_guide": "Guide officiel du tourisme de Madeira",
+            "discover_official_trails": "Découvrez les sentiers officiels, les levadas et les événements de l'île.",
+            "official_website_visit": "Visitez le site officiel de Madeira",
+            "hiking_guide": "WALKME - Le guide de randonnée n°1 de Madeira",
+            "hiking_desc": "Trouvez les prochains sentiers, recevez des alertes en temps réel, un accès hors ligne et restez en sécurité.",
+            "promo_code": "Utilisez le code promo: <strong>WALKMEAL30</strong> et obtenez une réduction!",
+            "official_website_walkme": "Visitez le site officiel de WALKME",
+            "local_accomodation": "Licence d'hébergement local (RNAL): <strong>176349/AL</strong>",
+            "complaint_book": "Un livre de réclamations (<em>Livro de Reclamações</em>) est disponible sur place et peut être demandé à l'hôte à tout moment.",
+            "security_privacy": "Sécurité et confidentialité",
+            "security_privacy_desc": "Pour la sécurité de nos clients, cette propriété est équipée d'une caméra de surveillance extérieure strictement orientée vers la porte d'entrée principale. Les enregistrements sont conservés pendant une durée limitée.",
+            "ai_notice": "Les traductions de ce site web ont été réalisées entièrement par des traducteurs d'intelligence artificielle. Nous vous prions de nous excuser pour toute faute d'orthographe ou formulation qui ne serait pas tout à fait exacte.",
+            "footer_rights": "Tous droits réservés.",
+            "footer_wish": "Nous vous souhaitons un séjour inoubliable sur l'île de Madère !"
+        },
+        de: {
+            "hero-title": "Willkommen in der Casa dos Azevedos",
+            "hero-subtitle": "Alles, was Sie für einen perfekten Aufenthalt benötigen. Erkunden Sie unseren digitalen Leitfaden mit Hausregeln und Tipps.",
+            "badge-checkin-lbl": "Check-in",
+            "badge-checkout-lbl": "Check-out",
+            "badge-host-lbl": "Gastgeber",
+            "tab-contacts": "Kontakte",
+            "tab-access": "Anreise & Parken",
+            "tab-checkin": "An- & Abreise",
+            "tab-rules": "Hausregeln",
+            "tab-appliances": "Ausstattung",
+            "tab-safety": "Sicherheit & Öko",
+            "tab-explore": "Madeira Entdecken",
+            "contacts-heading": "Wichtige Kontakte",
+            "rule-quiet-title": "Ruhezeiten",
+            "rule-quiet-desc": "Bitte minimieren Sie Lärm während der Nachtstunden und respektieren Sie unsere Nachbarn.",
+            "contacts-sub": "Wir sind während Ihres gesamten Aufenthalts für Sie da.",
+            "emerg-title": "Notrufnummer: 112",
+            "emerg-call": "Rufen Sie jetzt die 112 an",
+            "emerg-desc": "Polizei, Krankenwagen und Feuerwehr in Portugal.",
+            "health-heading": "Gesundheitsdienste & Apotheken",
+            "medical_care": "Medizinische Versorgung",
+            "emergency_hospital": "Notfallkrankenhaus",
+            "private_care": "Private Versorgung",
+            "pharmacy-list": "Nächstgelegene Apotheken:",
+            "access-heading": "Anreise & Parkmöglichkeiten",
+            "smartlock-steps": "SCHRITT FÜR SCHRITT",
+            "checkout-thanks": "Wir wünschen Ihnen eine sichere Heimreise! Gute Fahrt!",
+            "access-sub": "Schritt-für-Schritt-Anleitung für eine reibungslose Ankunft.",
+            "parking-title": "Hinweis zum Parken",
+            "parking-desc": "Die Unterkunft verfügt über keine privaten Parkplätze. Öffentliche Alternativen finden Sie unten. <br /><br /> <strong>Klicken Sie auf die Kästchen, um Bilder der Route zu sehen.</strong>",
+            "lightblue-title": "Hellblaue Route",
+            "lightgreen-title": "Hellgrüne Route",
+            "designated_parking_area": "Ausgewiesener Parkplatz",
+            "traffic-warning-title": "Wichtiger Hinweis zum Fahren",
+            "traffic-warning-desc": "Auf der Rua do Alto da Torre herrscht Einbahnverkehr. Obwohl es gesetzlich erlaubt ist, auf bestimmten blau markierten Streckenabschnitten zu fahren, wird dies nicht empfohlen, da die Straßen sehr eng sind. Wir empfehlen, auf dem ausgewiesenen Parkplatz zu parken und die kurze Strecke zu Fuß zurückzulegen.",
+            "pedestrian_footpath": "Fußgängerweg",
+            "house_entrance_stairs": "Treppen zum Hauseingang",
+            "route-step-desc": "Folgen Sie der angegebenen Route, um zum Hauseingang zu gelangen.",
+            "main_road": "Hauptstraße, João Gonçalves Zarco",
+            "parking_lot": "Parkplatz",
+            "narrow_access_road": "Schmale Zufahrtsstraße / Levada",
+            "direct_steps": "Direkte Treppe",
+            "darkblue-title": "Dunkelblaue Route",
+            "darkblue-desc": "Folgen Sie der dunkelblauen Route, um zum nächsten öffentlichen Parkplatz und zur Haustür zu gelangen.",
+            "checkin-heading": "Check-in & Check-out Anweisungen",
+            "checkin-sub": "Anleitung für den Selbst-Check-in und Check-out-Checkliste.",
+            "checkin-title": "Check-in Details",
+            "checkin-time-lbl": "Zeit: Ab 16:00 Uhr",
+            "walk_front": "Gehen Sie zum Vorderteil des Hauses.",
+            "locate_keyboard": "Suchen Sie das beleuchtete digitale Tastenfeld.",
+            "type_code": "Geben Sie den vom Gastgeber bereitgestellten 4-stelligen Zugangscode ein.",
+            "press_key": "Drücken Sie die SCHLÜSSEL-Taste, um die Tür zu entsperren.",
+            "smartlock-title": "Elektronisches Türschloss",
+            "checkout-title": "Check-out Details",
+            "checkout-time-lbl": "Zeit: Bis 12:00 Uhr",
+            "checkout-checklist-title": "Check-out Checkliste:",
+            "chk-lights": "Alle Lichter und Geräte ausschalten",
+            "chk-windows": "Alle Fenster sicher schließen",
+            "chk-trash": "Müll in den dafür vorgesehenen Bins entsorgen",
+            "chk-door": "Sicherstellen, dass die Tür abgeschlossen ist",
+            "rules-heading": "Allgemeine Hausregeln",
+            "rules-sub": "Bitte beachten Sie diese Regeln für einen angenehmen Aufenthalt.",
+            "app-heading": "Bedienung der Geräte",
+            "app-sub": "Kurzanleitung für die Nutzung der Haushaltsgeräte.",
+            "safety-heading": "Sicherheit & Umweltpraxis",
+            "safety-sub": "Sicherheitsausrüstung und nachhaltige Tipps.",
+            "explore-heading": "Madeira & Umgebung Erkunden",
+            "rule-smoke-title": "Rauchen im Innenbereich verboten",
+            "rule-smoke-desc": "Zigaretten, E-Zigaretten, Vapes",
+            "rule-smoke-body": "Rauchen ist im Innenbereich strengstens untersagt. Nur im Freien auf dem Zugangsweg erlaubt.",
+            "rule-pets-title": "Keine Haustiere erlaubt",
+            "rule-pets-desc": "Haustierfreie Unterkunft",
+            "rule-pets-body": "Haustiere sind in der Unterkunft nicht gestattet, um die Hygienevorschriften einzuhalten.",
+            "rule-party-title": "Keine Partys erlaubt",
+            "rule-party-desc": "Strenge Richtlinie",
+            "rule-party-body": "Partys sind in der Unterkunft nicht gestattet, um eine ruhige Umgebung für alle Nachbarn und Gäste zu gewährleisten.",
+            "rule-visitors-title": "Besucherregelung",
+            "rule-visitors-desc": "Informieren Sie den Gastgeber über nicht registrierte Besucher",
+            "rule-visitors-body": "Übernachtungsgäste sind ohne vorherige Zustimmung des Gastgebers nicht gestattet (Gebühren können anfallen).",
+            "rule-children-title": "Kinderregelung",
+            "rule-children-desc": "Kinder unter 12 Jahren",
+            "rule-children-body": "Kinder unter 12 Jahren sind ohne Aufsicht eines Erwachsenen nicht gestattet. Ein Kinderbett ist auf Anfrage verfügbar.",
+            "smart_TV": "Smart TV",
+            "location_tv": "Wohnzimmer",
+            "remote_on": "Drücken Sie die <strong>Power</strong>-Taste, um den Fernseher einzuschalten.",
+            "netflix": "Smart TV unterstützt Apps wie <strong>Netflix</strong> (verwenden Sie Ihr persönliches Konto).",
+            "important_personal": "<strong>Wichtig:</strong> Bitte melden Sie sich vor der Abreise von Ihren persönlichen Streaming-Konten ab.",
+            "induction_hob": "Induktionskochfeld",
+            "press_power_button": "Drücken Sie die <strong>Ein-/Aus-Taste (ganz links)</strong>, um einzuschalten.",
+            "select_cooking_zone": "Wählen Sie die gewünschte Kochzone auf dem Bildschirm aus.",
+            "adjust_heat_intensity": "Passen Sie die Hitzeintensität mit den Symbolen <strong>“+”</strong> und <strong>“-”</strong> an.",
+            "microwave": "Mikrowelle",
+            "location_kitchen": "Küche",
+            "open_door": "Öffnen Sie die Tür mit der <strong>großen unteren Taste</strong>.",
+            "set_heating_time": "Stellen Sie die Erhitzungszeit ein, indem Sie auf das <strong>Uhrensymbol</strong> drücken, gefolgt von <strong>Start</strong>.",
+            "electric_oven": "Elektrischer Ofen",
+            "left_dial": "<strong>Linker Knopf:</strong> Kochmodus / Funktion.",
+            "center_dial": "<strong>Mittlerer Knopf:</strong> Timer-Alarm.",
+            "right_dial": "<strong>Rechter Knopf:</strong> Temperatureinstellung (°C).",
+            "timer_note": "Hinweis: Der Timer gibt einen Ton aus, schaltet den Ofen jedoch nicht automatisch aus.",
+            "washing_machine": "Waschmaschine",
+            "location_laundry": "Waschküche",
+            "load_laundry": "Laden Sie die Wäsche in die Trommel und schließen Sie die Tür.",
+            "add_detergent": "Fügen Sie das Waschmittel in das <strong>linke Schubladenfach</strong> hinzu.",
+            "select_program": "Wählen Sie das Programm am Wähler aus und drücken Sie <strong>Start</strong>.",
+            "doorbell_intercom": "Türklingel und Gegensprechanlage",
+            "location_entrance": "Eingang / Elektrischer Schaltschrank",
+            "doorbell_location": "In der Nähe des Hauptschaltschrankes (Elektrischer Schaltschrank) gelegen.",
+            "doorbell_camera": "Drücken Sie die <strong>orangefarbene Taste oben rechts</strong>, um die Außenkamera anzuzeigen.",
+            "doorbell_remote": "Tippen Sie auf das Schlüsselsymbol auf dem Bildschirm (<i class=\"fa-solid fa-key\"></i>), um die Tür aus der Ferne zu entriegeln.",
+            "doorbell_manual": "Die manuelle Entriegelungstaste befindet sich in der Mitte des Türschlosses.",
+            "coffee_machine": "Kaffeemaschine",
+            "machine_on": "Schalten Sie die Maschine ein, indem Sie die beiden oberen Tasten einige Sekunden lang gedrückt halten. Die Lichter blinken, während die Maschine aufheizt.",
+            "add_water": "Fügen Sie Wasser in den Behälter hinzu.",
+            "load_capsule": "Laden Sie eine Kaffeekapsel, indem Sie den Hebel anheben und die Kapsel in der gleichen Ausrichtung wie durch die Form oben angezeigt, einlegen.",
+            "select_brew": "Wählen Sie die kleine Tasse für einen kurzen Espresso oder die große Tasse für einen etwas längeren Espresso.",
+            "enjoy": "Genießen Sie Ihren Kaffee!",
+            "extinguisher_heading": "Feuerlöscher",
+            "extinguisher_location": "Der Feuerlöscher befindet sich hinter der Eingangstür.",
+            "aid_heading": "Erste-Hilfe-Kasten",
+            "aid_location": "Befindet sich im Schrank neben dem Wohnzimmer-Sofa.",
+            "electrical_heading": "Elektrischer Schaltschrank",
+            "eletrical_location": "Beschrifteter elektrischer Schaltschrank direkt nach der Eingangstür.",
+            "water_safe_title": "Das Leitungswasser ist Trinkwasser",
+            "water_safe_desc": "Sie können das Leitungswasser in der Unterkunft trinken. Es ist sicher und hilft uns, Plastikmüll zu vermeiden.",
+            "linen_title": "Bettwäsche und Handtücher inklusive",
+            "linen_desc": "Bettwäsche und Handtücher sind in Ihrem Aufenthalt inbegriffen.",
+            "eco_practices_heading": "Ökologische Praktiken",
+            "eco_practices_desc": "Die Insel Madeira ist ein Naturparadies. Helfen Sie uns, unsere Umwelt zu schützen, indem Sie diese einfachen Tipps befolgen:",
+            "save_water_heading": "Wasser sparen",
+            "save_water_desc": "Vermeiden Sie es, Wasserhähne laufen zu lassen, und genießen Sie kurze erfrischende Duschen.",
+            "save_electricity_heading": "Strom sparen",
+            "save_electricity_desc": "Schalten Sie Lichter und Elektronik aus, wenn Sie das Haus verlassen.",
+            "residues_heading": "Abfall trennen",
+            "residues_desc": "Verwenden Sie die farbcodierten Recyclingbehälter in der Waschküche.",
+            "large_trash_heading": "Entsorgung von großen Abfällen",
+            "large_trash_desc": "Bringen Sie große Müllsäcke zu den nahegelegenen Straßenrecyclingbehältern.",
+            "garbage_location_desc": "<strong>Im folgenden Bild finden Sie den Standort der Recyclingbehälter für die Entsorgung von großen Abfällen.</strong>",
+            "explore-sub": "Empfohlene Strände, Aussichtspunkte und Restaurants.",
+            "beach_recommended": "Empfohlene Strände",
+            "pebble_beach": "Câmara de Lobos • Kieselstrand",
+            "cable_car_required": "Seilbahn erforderlich • Ruhige Lage",
+            "cable_car_access": "Zugang über Seilbahn • Vorabreservierung empfohlen",
+            "formosa_beach": "Funchal • Schwarzer Sand- & Kiesstrand",
+            "lido_beach": "Funchal • Naturpools & Annehmlichkeiten",
+            "golden_sand_beaches": "Strände mit goldenem Sand",
+            "scenic_viewpoints_title": "Aussichtspunkte",
+            "pico_da_torre": "Stiefelförmiger Blick auf den Yachthafen von Câmara de Lobos.",
+            "cabo_girao_skywalk": "Einer der höchsten Meeresklippen Europas (580 m).",
+            "eira_do_serrado": "Panoramablick über das Curral das Freiras Tal.",
+            "boca_da_corrida": "Atemberaubende Berg- und Ozeanblicke.",
+            "gastronomy_restaurants_title": "Gastronomie & Lokale \"Espetada\" Restaurants",
+            "traditional_beef_skewers": "Traditionelle Rindfleischspieße (Espetada):",
+            "other_restaurants": "Andere Restaurants",
+            "santa_cecilia_desc": "Tolle nahegelegene Stelle für Frühstück & Gebäck.",
+            "deserta_pequena_desc": "Gutes feines Restaurant für Meeresfrüchte und Fisch.",
+            "vila_do_peixe_desc": "Frische Meeresfrüchte im Hafen von Câmara de Lobos.",
+            "o_pasto_desc": "Bekannt für sein brasilianisches Barbecue, mehrere Fleischoptionen.",
+            "adega_do_teixeira_desc": "Traditionelles Restaurant mit typischen Madeirensischen Gerichten.",
+            "official_tourism_guide": "Offizieller Madeira Tourismusführer",
+            "discover_official_trails": "Entdecken Sie offizielle Wanderwege, Levadas und Veranstaltungen auf der Insel.",
+            "official_website_visit": "Besuchen Sie die offizielle Madeira-Website",
+            "hiking_guide": "WALKME - Der N.1 Wanderführer von Madeira",
+            "hiking_desc": "Finden Sie die nächsten Wanderwege, erhalten Sie Benachrichtigungen in Echtzeit, Offline-Zugriff und bleiben Sie sicher.",
+            "promo_code": "Verwenden Sie den Promo-Code: <strong>WALKMEAL30</strong> und erhalten Sie einen Rabatt!",
+            "official_website_walkme": "Besuchen Sie die offizielle WALKME-Website",
+            "local_accomodation": "Lokale Unterkunftslizenz (RNAL): <strong>176349/AL</strong>",
+            "complaint_book": "Ein Beschwerdebuch (<em>Livro de Reclamações</em>) ist auf dem Gelände verfügbar und kann jederzeit beim Gastgeber angefordert werden.",
+            "security_privacy": "Sicherheit & Datenschutz",
+            "security_privacy_desc": "Für die Sicherheit unserer Gäste ist diese Unterkunft mit einer Außenüberwachungskamera ausgestattet, die strikt auf die Haupteingangstür gerichtet ist. Die Aufnahmen werden für einen begrenzten Zeitraum gespeichert.",
+            "ai_notice": "Die Übersetzungen auf dieser Website wurden vollständig von KI-Übersetzern erstellt. Wir entschuldigen uns für etwaige Rechtschreibfehler oder Formulierungen, die nicht ganz zutreffend sind.",
+            "footer_rights": "Alle Rechte vorbehalten.",
+            "footer_wish": "Wir wünschen Ihnen einen unvergesslichen Aufenthalt auf der Insel Madeira!"
+        },
+        it: {
+            "hero-title": "Benvenuti a Casa dos Azevedos",
+            "hero-subtitle": "Tutto ciò che serve per un soggiorno confortevole. Consultate la nostra guida digitale per le regole della casa, le istruzioni sulle attrezzature e i consigli locali.",
+            "badge-checkin-lbl": "Check-in",
+            "badge-checkout-lbl": "Check-out",
+            "badge-host-lbl": "Assistenza dell'host",
+            "tab-contacts": "Contatti",
+            "tab-access": "Accesso e parcheggio",
+            "tab-checkin": "Check-in / Check-out",
+            "tab-rules": "Regole della casa",
+            "tab-appliances": "Elettrodomestici",
+            "tab-safety": "Sicurezza ed eco",
+            "tab-explore": "Esplora Madeira",
+            "contacts-heading": "Contatti importanti",
+            "contacts-sub": "Siamo a vostra disposizione durante il soggiorno.",
+            "emerg-title": "Numero di emergenza: 112",
+            "emerg-desc": "Per Polizia, Ambulanza o Vigili del fuoco in tutto il Portogallo.",
+            "emerg-call": "Chiama subito il 112",
+            "health-heading": "Servizi sanitari e farmacie nelle vicinanze",
+            "medical_care": "Assistenza medica",
+            "emergency_hospital": "Pronto soccorso",
+            "private_care": "Assistenza privata",
+            "pharmacy-list": "Farmacie più vicine:",
+            "access-heading": "Indicazioni e parcheggio",
+            "access-sub": "Istruzioni passo dopo passo per raggiungere Casa dos Azevedos senza difficoltà.",
+            "parking-title": "Avviso sul parcheggio",
+            "parking-desc": "Questa struttura non dispone di parcheggio privato. Tuttavia, qui sotto sono indicate comode opzioni di parcheggio pubblico e i percorsi di accesso designati.<br /><br /> <strong>Cliccate sui riquadri per vedere le immagini del percorso.</strong>",
+            "lightblue-title": "Percorso azzurro",
+            "route-step-desc": "Seguite il percorso indicato per raggiungere l'ingresso della casa.",
+            "main_road": "Strada principale, João Gonçalves Zarco",
+            "pedestrian_footpath": "Sentiero pedonale / Levada",
+            "house_entrance_stairs": "Scale per la casa",
+            "darkblue-title": "Percorso blu scuro",
+            "darkblue-desc": "Seguite il percorso blu scuro per raggiungere il parcheggio pubblico più vicino e l'ingresso della casa.",
+            "parking_lot": "Parcheggio",
+            "narrow_access_road": "Sentiero pedonale / Levada",
+            "direct_steps": "Scale per la casa",
+            "traffic-warning-title": "Nota importante sulla guida",
+            "traffic-warning-desc": "Su Rua do Alto da Torre il traffico è a senso unico. Sebbene percorrere in discesa alcuni tratti del percorso blu sia legalmente possibile, non è consigliato perché le strade sono molto strette. Consigliamo di parcheggiare nell'area designata e di percorrere a piedi il breve sentiero.",
+            "lightgreen-title": "Percorso verde chiaro",
+            "designated_parking_area": "Area di parcheggio designata",
+            "checkin-heading": "Istruzioni per check-in e check-out",
+            "checkin-sub": "Procedura di self check-in e lista di controllo per una partenza senza intoppi.",
+            "linen_title": "Biancheria da letto e asciugamani inclusi",
+            "linen_desc": "Lenzuola e asciugamani sono inclusi nel soggiorno.",
+            "checkin-title": "Dettagli del check-in",
+            "checkin-time-lbl": "Orario: dalle 16:00",
+            "smartlock-title": "Metodo con tastierino intelligente",
+            "smartlock-steps": "PASSO DOPO PASSO",
+            "walk_front": "Dirigetevi verso la parte anteriore della casa.",
+            "locate_keyboard": "Individuate il tastierino digitale illuminato.",
+            "type_code": "Inserite il codice di accesso di 4 cifre fornito dall'host.",
+            "press_key": "Premete il pulsante con l'ICONA DELLA CHIAVE per sbloccare la porta.",
+            "checkout-title": "Dettagli del check-out",
+            "checkout-time-lbl": "Orario: fino alle 12:00",
+            "checkout-checklist-title": "Lista di controllo per il check-out:",
+            "chk-lights": "Spegnete tutte le luci e gli elettrodomestici",
+            "chk-windows": "Chiudete bene tutte le finestre",
+            "chk-trash": "Portate i rifiuti nei contenitori per la raccolta differenziata indicati",
+            "chk-door": "Assicuratevi che la porta d'ingresso sia chiusa a chiave correttamente",
+            "checkout-thanks": "Vi auguriamo un buon viaggio di ritorno a casa! Buon viaggio!",
+            "rules-heading": "Regole generali della casa",
+            "rules-sub": "Vi preghiamo di rispettare queste indicazioni per garantire un soggiorno piacevole a tutti.",
+            "rule-quiet-title": "Ore di silenzio",
+            "rule-quiet-desc": "Vi preghiamo di limitare il rumore durante le ore notturne e di rispettare i nostri vicini.",
+            "rule-smoke-title": "Vietato fumare all'interno",
+            "rule-smoke-desc": "Sigarette, sigarette elettroniche, vape",
+            "rule-smoke-body": "È severamente vietato fumare all'interno. Consentito solo all'aperto, sul sentiero di accesso.",
+            "rule-party-title": "Niente feste",
+            "rule-party-desc": "Politica rigorosa",
+            "rule-party-body": "Le feste non sono consentite nella struttura, per garantire un ambiente tranquillo a tutti i vicini e agli ospiti.",
+            "rule-visitors-title": "Politica sulle visite",
+            "rule-visitors-desc": "Informate l'host di eventuali visitatori non registrati",
+            "rule-visitors-body": "Non sono ammessi ospiti per la notte senza il previo consenso dell'host (potrebbero essere applicate tariffe).",
+            "rule-pets-title": "Animali non ammessi",
+            "rule-pets-desc": "Struttura senza animali",
+            "rule-pets-body": "Gli animali non sono ammessi nella struttura per mantenere gli standard igienici.",
+            "rule-children-title": "Politica per i bambini",
+            "rule-children-desc": "Bambini sotto i 12 anni",
+            "rule-children-body": "I bambini sotto i 12 anni non sono ammessi senza la supervisione di un adulto. Culla disponibile su richiesta.",
+            "app-heading": "Attrezzature e funzionamento",
+            "app-sub": "Guida rapida per utilizzare facilmente gli elettrodomestici di casa.",
+            "smart_TV": "Smart TV",
+            "location_tv": "Soggiorno",
+            "remote_on": "Premete il pulsante <strong>Power</strong> per accendere la TV.",
+            "netflix": "La Smart TV supporta app come <strong>Netflix</strong> (usate il vostro account personale).",
+            "important_personal": "<strong>Importante:</strong> prima della partenza, uscite dagli account di streaming personali.",
+            "induction_hob": "Piano a induzione",
+            "location_kitchen": "Cucina",
+            "press_power_button": "Premete il <strong>pulsante di accensione (il primo a sinistra)</strong> per accendere.",
+            "select_cooking_zone": "Selezionate sullo schermo la zona di cottura desiderata.",
+            "adjust_heat_intensity": "Regolate l'intensità del calore con i simboli <strong>“+”</strong> e <strong>“-”</strong>.",
+            "microwave": "Forno a microonde",
+            "open_door": "Aprite lo sportello con il <strong>grande pulsante in basso</strong>.",
+            "set_heating_time": "Impostate il tempo di riscaldamento premendo l'<strong>icona dell'orologio</strong> e poi <strong>Start</strong>.",
+            "electric_oven": "Forno elettrico",
+            "left_dial": "<strong>Manopola sinistra:</strong> modalità / funzione di cottura.",
+            "center_dial": "<strong>Manopola centrale:</strong> avviso del timer.",
+            "right_dial": "<strong>Manopola destra:</strong> regolazione della temperatura (°C).",
+            "timer_note": "Nota: il timer emette un suono ma non spegne il forno automaticamente.",
+            "washing_machine": "Lavatrice",
+            "location_laundry": "Lavanderia",
+            "load_laundry": "Inserite il bucato nel cestello e chiudete lo sportello.",
+            "add_detergent": "Aggiungete il detersivo nello <strong>scomparto del cassetto di sinistra</strong>.",
+            "select_program": "Selezionate il programma con la manopola e premete <strong>Start</strong>.",
+            "doorbell_intercom": "Videocitofono e serratura",
+            "location_entrance": "Ingresso / Quadro elettrico",
+            "doorbell_location": "Si trova vicino al quadro elettrico principale.",
+            "doorbell_camera": "Premete il <strong>pulsante arancione in alto a destra</strong> per vedere la telecamera esterna.",
+            "doorbell_remote": "Toccate l'icona della chiave sullo schermo (<i class=\"fa-solid fa-key\"></i>) per sbloccare la porta a distanza.",
+            "doorbell_manual": "Il pulsante di sblocco manuale si trova al centro della serratura della porta.",
+            "coffee_machine": "Macchina del caffè",
+            "machine_on": "Accendete la macchina tenendo premuti i due pulsanti in alto per alcuni secondi. Le luci lampeggeranno mentre la macchina si riscalda.",
+            "add_water": "Aggiungete acqua nel serbatoio.",
+            "load_capsule": "Inserite una capsula di caffè sollevando la leva e posizionando la capsula con lo stesso orientamento indicato dalla forma sulla parte superiore.",
+            "select_brew": "Selezionate la tazzina piccola per un espresso corto o quella grande per un espresso leggermente più lungo.",
+            "enjoy": "Buon caffè!",
+            "safety-heading": "Sicurezza, emergenze e pratiche eco-sostenibili",
+            "safety-sub": "Punti importanti per la sicurezza e i nostri consigli di sostenibilità.",
+            "water_safe_title": "L'acqua del rubinetto è potabile",
+            "water_safe_desc": "Potete bere l'acqua del rubinetto della casa. È sicura e ci aiuta a ridurre i rifiuti di plastica.",
+            "extinguisher_heading": "Estintore",
+            "extinguisher_location": "L'estintore si trova dietro la porta d'ingresso.",
+            "aid_heading": "Kit di pronto soccorso",
+            "aid_location": "Si trova nell'armadietto accanto al divano del soggiorno.",
+            "electrical_heading": "Quadro elettrico",
+            "eletrical_location": "Quadro elettrico con etichetta subito dopo la porta d'ingresso.",
+            "eco_practices_heading": "Pratiche eco-sostenibili",
+            "eco_practices_desc": "L'isola di Madeira è un paradiso naturale. Aiutateci a proteggere l'ambiente seguendo questi semplici consigli:",
+            "save_water_heading": "Risparmiare acqua",
+            "save_water_desc": "Evitate di lasciare i rubinetti aperti e fate docce brevi e rinfrescanti.",
+            "save_electricity_heading": "Risparmiare elettricità",
+            "save_electricity_desc": "Spegnete luci e apparecchi elettronici quando uscite di casa.",
+            "residues_heading": "Raccolta differenziata",
+            "residues_desc": "Usate i contenitori per la raccolta differenziata, distinti per colore, che si trovano in lavanderia.",
+            "large_trash_heading": "Smaltimento dei rifiuti ingombranti",
+            "large_trash_desc": "Portate i sacchi di rifiuti grandi ai contenitori stradali nelle vicinanze.",
+            "garbage_location_desc": "<strong>Nell'immagine seguente potete trovare l'ubicazione dei contenitori per lo smaltimento dei rifiuti ingombranti.</strong>",
+            "explore-heading": "Esplora Madeira e dintorni",
+            "explore-sub": "Spiagge, punti panoramici, ristoranti e gite di un giorno selezionati con cura.",
+            "official_tourism_guide": "Guida turistica ufficiale di Madeira",
+            "discover_official_trails": "Scoprite i sentieri ufficiali, le levadas e gli eventi dell'isola.",
+            "official_website_visit": "Visitate il sito ufficiale di Madeira",
+            "hiking_guide": "WALKME - La guida n.1 per le escursioni a Madeira",
+            "hiking_desc": "Trovate i prossimi sentieri, ricevete avvisi in tempo reale, accesso offline e restate al sicuro.",
+            "promo_code": "Usate il codice promozionale: <strong>WALKMEAL30</strong> e ottenete uno sconto!",
+            "official_website_walkme": "Visitate il sito ufficiale di WALKME",
+            "beach_recommended": "Spiagge consigliate",
+            "pebble_beach": "Câmara de Lobos • Spiaggia di ciottoli",
+            "cable_car_required": "Funivia necessaria • Luogo tranquillo",
+            "cable_car_access": "Accesso in funivia • Si consiglia la prenotazione anticipata",
+            "formosa_beach": "Funchal • Spiaggia di sabbia nera e ciottoli",
+            "lido_beach": "Funchal • Piscine naturali e servizi",
+            "golden_sand_beaches": "Spiagge di sabbia dorata",
+            "scenic_viewpoints_title": "Punti panoramici",
+            "pico_da_torre": "Vista a forma di stivale sul porticciolo di Câmara de Lobos.",
+            "cabo_girao_skywalk": "Una delle scogliere sul mare più alte d'Europa (580 m).",
+            "eira_do_serrado": "Vista panoramica sulla valle di Curral das Freiras.",
+            "boca_da_corrida": "Splendidi panorami su montagne e oceano.",
+            "gastronomy_restaurants_title": "Gastronomia e ristoranti locali di “Espetada”",
+            "traditional_beef_skewers": "Spiedini di manzo tradizionali (Espetada):",
+            "other_restaurants": "Altri ristoranti",
+            "santa_cecilia_desc": "Ottimo locale vicino per colazione e dolci.",
+            "deserta_pequena_desc": "Buon ristorante raffinato per frutti di mare e pesce.",
+            "vila_do_peixe_desc": "Frutti di mare freschi nel porto di Câmara de Lobos.",
+            "o_pasto_desc": "Noto per il barbecue brasiliano, con diverse opzioni di carne.",
+            "adega_do_teixeira_desc": "Ristorante tradizionale con piatti tipici di Madeira.",
+            "local_accomodation": "Licenza di alloggio locale (RNAL): <strong>176349/AL</strong>",
+            "complaint_book": "Nella struttura è disponibile un libro dei reclami (<em>Livro de Reclamações</em>) che può essere richiesto all'host in qualsiasi momento.",
+            "security_privacy": "Sicurezza e privacy",
+            "security_privacy_desc": "Per la sicurezza dei nostri ospiti, questa struttura è dotata di una telecamera di sorveglianza esterna rivolta esclusivamente alla porta d'ingresso principale. Le riprese vengono conservate per un periodo limitato.",
+            "ai_notice": "Le traduzioni di questo sito web sono state realizzate interamente da traduttori basati sull'intelligenza artificiale. Ci scusiamo per eventuali errori di ortografia o formulazioni non del tutto accurate.",
+            "footer_rights": "Tutti i diritti riservati.",
+            "footer_wish": "Vi auguriamo un soggiorno indimenticabile sull'isola di Madeira!"
+        },
+        pl: {
+            "hero-title": "Witamy w Casa dos Azevedos",
+            "hero-subtitle": "Wszystko, czego potrzeba do komfortowego pobytu. Zachęcamy do zapoznania się z naszym cyfrowym przewodnikiem: zasadami pobytu, instrukcjami obsługi urządzeń i lokalnymi poleceniami.",
+            "badge-checkin-lbl": "Zameldowanie",
+            "badge-checkout-lbl": "Wymeldowanie",
+            "badge-host-lbl": "Pomoc gospodarza",
+            "tab-contacts": "Kontakt",
+            "tab-access": "Dojazd i parking",
+            "tab-checkin": "Zameldowanie / wymeldowanie",
+            "tab-rules": "Zasady pobytu",
+            "tab-appliances": "Urządzenia",
+            "tab-safety": "Bezpieczeństwo i ekologia",
+            "tab-explore": "Odkryj Maderę",
+            "contacts-heading": "Ważne kontakty",
+            "contacts-sub": "Jesteśmy do Państwa dyspozycji podczas pobytu.",
+            "emerg-title": "Numer alarmowy: 112",
+            "emerg-desc": "Policja, pogotowie ratunkowe lub straż pożarna na terenie całej Portugalii.",
+            "emerg-call": "Zadzwoń teraz pod 112",
+            "health-heading": "Opieka zdrowotna i apteki w pobliżu",
+            "medical_care": "Opieka medyczna",
+            "emergency_hospital": "Szpital z oddziałem ratunkowym",
+            "private_care": "Opieka prywatna",
+            "pharmacy-list": "Najbliższe apteki:",
+            "access-heading": "Dojazd i parking",
+            "access-sub": "Wskazówki krok po kroku, jak sprawnie dotrzeć do Casa dos Azevedos.",
+            "parking-title": "Informacja o parkowaniu",
+            "parking-desc": "Obiekt nie posiada prywatnego parkingu. Poniżej opisano jednak wygodne miejsca parkingowe publiczne oraz wyznaczone trasy dojścia.<br /><br /> <strong>Kliknij w ramki, aby zobaczyć zdjęcia trasy.</strong>",
+            "lightblue-title": "Trasa jasnoniebieska",
+            "route-step-desc": "Podążaj wskazaną trasą, aby dotrzeć do wejścia do domu.",
+            "main_road": "Droga główna, João Gonçalves Zarco",
+            "pedestrian_footpath": "Ścieżka piesza / Levada",
+            "house_entrance_stairs": "Schody do domu",
+            "darkblue-title": "Trasa ciemnoniebieska",
+            "darkblue-desc": "Podążaj ciemnoniebieską trasą, aby dotrzeć do najbliższego parkingu publicznego i wejścia do domu.",
+            "parking_lot": "Parking",
+            "narrow_access_road": "Ścieżka piesza / Levada",
+            "direct_steps": "Schody do domu",
+            "traffic-warning-title": "Ważna uwaga dotycząca jazdy",
+            "traffic-warning-desc": "Na Rua do Alto da Torre obowiązuje ruch jednokierunkowy. Choć zjazd niektórymi odcinkami niebieskiej trasy jest zgodny z prawem, nie jest zalecany, ponieważ drogi są bardzo wąskie. Zalecamy zaparkowanie na wyznaczonym parkingu i przejście krótką ścieżką pieszo.",
+            "lightgreen-title": "Trasa jasnozielona",
+            "designated_parking_area": "Wyznaczony obszar parkingowy",
+            "checkin-heading": "Instrukcje zameldowania i wymeldowania",
+            "checkin-sub": "Procedura samodzielnego zameldowania i lista kontrolna do sprawnego wyjazdu.",
+            "linen_title": "Pościel i ręczniki w cenie",
+            "linen_desc": "Pościel i ręczniki są wliczone w cenę pobytu.",
+            "checkin-title": "Szczegóły zameldowania",
+            "checkin-time-lbl": "Godziny: od 16:00",
+            "smartlock-title": "Metoda z inteligentną klawiaturą",
+            "smartlock-steps": "KROK PO KROKU",
+            "walk_front": "Podejdź do przodu domu.",
+            "locate_keyboard": "Znajdź podświetlaną klawiaturę cyfrową.",
+            "type_code": "Wpisz 4-cyfrowy kod dostępu otrzymany od gospodarza.",
+            "press_key": "Naciśnij przycisk z IKONĄ KLUCZA, aby otworzyć drzwi.",
+            "checkout-title": "Szczegóły wymeldowania",
+            "checkout-time-lbl": "Godziny: do 12:00",
+            "checkout-checklist-title": "Lista kontrolna przy wymeldowaniu:",
+            "chk-lights": "Wyłącz wszystkie światła i urządzenia",
+            "chk-windows": "Dokładnie zamknij wszystkie okna",
+            "chk-trash": "Wynieś śmieci do wyznaczonych pojemników do segregacji",
+            "chk-door": "Upewnij się, że drzwi wejściowe są prawidłowo zamknięte na klucz",
+            "checkout-thanks": "Życzymy bezpiecznej podróży powrotnej do domu! Szerokiej drogi!",
+            "rules-heading": "Ogólne zasady pobytu",
+            "rules-sub": "Prosimy o przestrzeganie tych zasad, aby zapewnić wszystkim miły pobyt.",
+            "rule-quiet-title": "Cisza nocna",
+            "rule-quiet-desc": "Prosimy o ograniczenie hałasu w porze nocnej i poszanowanie sąsiadów.",
+            "rule-smoke-title": "Zakaz palenia w środku",
+            "rule-smoke-desc": "Papierosy, e-papierosy, vape",
+            "rule-smoke-body": "Palenie wewnątrz jest surowo zabronione. Dozwolone tylko na zewnątrz, na ścieżce dojściowej.",
+            "rule-party-title": "Zakaz organizowania imprez",
+            "rule-party-desc": "Ścisła zasada",
+            "rule-party-body": "Na terenie obiektu nie wolno organizować imprez, aby zapewnić spokój wszystkim sąsiadom i gościom.",
+            "rule-visitors-title": "Zasady dotyczące odwiedzających",
+            "rule-visitors-desc": "Poinformuj gospodarza o każdym niezgłoszonym gościu",
+            "rule-visitors-body": "Nocowanie dodatkowych osób bez wcześniejszej zgody gospodarza jest niedozwolone (mogą obowiązywać opłaty).",
+            "rule-pets-title": "Zakaz wprowadzania zwierząt",
+            "rule-pets-desc": "Obiekt wolny od zwierząt",
+            "rule-pets-body": "Zwierzęta nie są dozwolone w obiekcie ze względu na utrzymanie standardów higieny.",
+            "rule-children-title": "Zasady dotyczące dzieci",
+            "rule-children-desc": "Dzieci poniżej 12 lat",
+            "rule-children-body": "Dzieci poniżej 12 lat nie mogą przebywać bez opieki osoby dorosłej. Łóżeczko dziecięce dostępne na życzenie.",
+            "app-heading": "Wyposażenie i obsługa",
+            "app-sub": "Krótki przewodnik po łatwej obsłudze urządzeń domowych.",
+            "smart_TV": "Telewizor Smart TV",
+            "location_tv": "Salon",
+            "remote_on": "Naciśnij przycisk <strong>Power</strong>, aby włączyć telewizor.",
+            "netflix": "Smart TV obsługuje aplikacje takie jak <strong>Netflix</strong> (użyj własnego konta).",
+            "important_personal": "<strong>Ważne:</strong> przed wyjazdem wyloguj się z osobistych kont streamingowych.",
+            "induction_hob": "Płyta indukcyjna",
+            "location_kitchen": "Kuchnia",
+            "press_power_button": "Naciśnij <strong>przycisk zasilania (pierwszy z lewej)</strong>, aby włączyć.",
+            "select_cooking_zone": "Wybierz na ekranie żądaną strefę grzewczą.",
+            "adjust_heat_intensity": "Reguluj moc grzania symbolami <strong>„+”</strong> i <strong>„-”</strong>.",
+            "microwave": "Kuchenka mikrofalowa",
+            "open_door": "Otwórz drzwiczki <strong>dużym przyciskiem na dole</strong>.",
+            "set_heating_time": "Ustaw czas podgrzewania, naciskając <strong>ikonę zegara</strong>, a następnie <strong>Start</strong>.",
+            "electric_oven": "Piekarnik elektryczny",
+            "left_dial": "<strong>Lewe pokrętło:</strong> tryb / funkcja pieczenia.",
+            "center_dial": "<strong>Środkowe pokrętło:</strong> sygnał timera.",
+            "right_dial": "<strong>Prawe pokrętło:</strong> regulacja temperatury (°C).",
+            "timer_note": "Uwaga: timer wydaje sygnał dźwiękowy, ale nie wyłącza piekarnika automatycznie.",
+            "washing_machine": "Pralka",
+            "location_laundry": "Pralnia",
+            "load_laundry": "Włóż pranie do bębna i zamknij drzwiczki.",
+            "add_detergent": "Dodaj proszek do <strong>lewej szufladki</strong>.",
+            "select_program": "Wybierz program pokrętłem i naciśnij <strong>Start</strong>.",
+            "doorbell_intercom": "Wideodomofon i zamek",
+            "location_entrance": "Wejście / Tablica elektryczna",
+            "doorbell_location": "Znajduje się w pobliżu głównej tablicy elektrycznej.",
+            "doorbell_camera": "Naciśnij <strong>pomarańczowy przycisk w prawym górnym rogu</strong>, aby zobaczyć obraz z kamery zewnętrznej.",
+            "doorbell_remote": "Dotknij ikony klucza na ekranie (<i class=\"fa-solid fa-key\"></i>), aby zdalnie otworzyć drzwi.",
+            "doorbell_manual": "Przycisk ręcznego otwierania znajduje się pośrodku zamka drzwi.",
+            "coffee_machine": "Ekspres do kawy",
+            "machine_on": "Włącz ekspres, przytrzymując przez kilka sekund dwa górne przyciski. Podczas nagrzewania się urządzenia kontrolki będą migać.",
+            "add_water": "Dolej wody do zbiornika.",
+            "load_capsule": "Włóż kapsułkę z kawą, unosząc dźwignię i układając kapsułkę w tym samym kierunku, który wskazuje kształt na górze.",
+            "select_brew": "Wybierz małą filiżankę dla krótkiego espresso lub dużą dla nieco dłuższego espresso.",
+            "enjoy": "Smacznej kawy!",
+            "safety-heading": "Bezpieczeństwo, sytuacje awaryjne i praktyki ekologiczne",
+            "safety-sub": "Ważne miejsca związane z bezpieczeństwem oraz nasze wskazówki dotyczące ochrony środowiska.",
+            "water_safe_title": "Woda z kranu nadaje się do picia",
+            "water_safe_desc": "W obiekcie możesz pić wodę z kranu. Jest bezpieczna i pomaga nam ograniczać ilość plastiku.",
+            "extinguisher_heading": "Gaśnica",
+            "extinguisher_location": "Gaśnica znajduje się za drzwiami wejściowymi.",
+            "aid_heading": "Apteczka pierwszej pomocy",
+            "aid_location": "Znajduje się w szafce obok sofy w salonie.",
+            "electrical_heading": "Tablica elektryczna",
+            "eletrical_location": "Opisana tablica elektryczna tuż za drzwiami wejściowymi.",
+            "eco_practices_heading": "Praktyki przyjazne środowisku",
+            "eco_practices_desc": "Madera to naturalny raj. Pomóż nam chronić środowisko, stosując się do tych prostych wskazówek:",
+            "save_water_heading": "Oszczędzaj wodę",
+            "save_water_desc": "Nie zostawiaj odkręconych kranów i wybieraj krótkie, orzeźwiające prysznice.",
+            "save_electricity_heading": "Oszczędzaj energię",
+            "save_electricity_desc": "Wyłączaj światła i urządzenia elektroniczne, wychodząc z domu.",
+            "residues_heading": "Segreguj odpady",
+            "residues_desc": "Korzystaj z kolorowych pojemników do segregacji odpadów znajdujących się w pralni.",
+            "large_trash_heading": "Wyrzucanie dużych odpadów",
+            "large_trash_desc": "Duże worki ze śmieciami wynoś do pobliskich ulicznych pojemników.",
+            "garbage_location_desc": "<strong>Na poniższym zdjęciu znajdziesz lokalizację pojemników na duże odpady.</strong>",
+            "explore-heading": "Odkryj Maderę i okolicę",
+            "explore-sub": "Starannie wybrane plaże, punkty widokowe, restauracje i wycieczki jednodniowe.",
+            "official_tourism_guide": "Oficjalny przewodnik turystyczny po Maderze",
+            "discover_official_trails": "Odkryj oficjalne szlaki, lewady i wydarzenia na wyspie.",
+            "official_website_visit": "Odwiedź oficjalną stronę Madery",
+            "hiking_guide": "WALKME – przewodnik nr 1 po szlakach pieszych Madery",
+            "hiking_desc": "Znajdź kolejne szlaki, otrzymuj alerty w czasie rzeczywistym, korzystaj offline i bądź bezpieczny.",
+            "promo_code": "Użyj kodu promocyjnego: <strong>WALKMEAL30</strong> i otrzymaj zniżkę!",
+            "official_website_walkme": "Odwiedź oficjalną stronę WALKME",
+            "beach_recommended": "Polecane plaże",
+            "pebble_beach": "Câmara de Lobos • Plaża kamienista",
+            "cable_car_required": "Wymagana kolejka linowa • Spokojne miejsce",
+            "cable_car_access": "Dojście kolejką linową • Zalecana wcześniejsza rezerwacja",
+            "formosa_beach": "Funchal • Plaża z czarnym piaskiem i kamyczkami",
+            "lido_beach": "Funchal • Naturalne baseny i udogodnienia",
+            "golden_sand_beaches": "Plaże ze złotym piaskiem",
+            "scenic_viewpoints_title": "Punkty widokowe",
+            "pico_da_torre": "Widok na przystań w Câmara de Lobos, przypominającą kształtem but.",
+            "cabo_girao_skywalk": "Jedne z najwyższych klifów morskich w Europie (580 m).",
+            "eira_do_serrado": "Panoramiczny widok na dolinę Curral das Freiras.",
+            "boca_da_corrida": "Zapierające dech w piersiach widoki na góry i ocean.",
+            "gastronomy_restaurants_title": "Gastronomia i lokalne restauracje serwujące „espetadę”",
+            "traditional_beef_skewers": "Tradycyjne szaszłyki wołowe (Espetada):",
+            "other_restaurants": "Inne restauracje",
+            "santa_cecilia_desc": "Świetne miejsce w pobliżu na śniadanie i wypieki.",
+            "deserta_pequena_desc": "Dobra, elegancka restauracja z owocami morza i rybami.",
+            "vila_do_peixe_desc": "Świeże owoce morza w porcie w Câmara de Lobos.",
+            "o_pasto_desc": "Znana z brazylijskiego grilla, z wieloma opcjami mięsnymi.",
+            "adega_do_teixeira_desc": "Tradycyjna restauracja z typowymi daniami maderskimi.",
+            "local_accomodation": "Licencja na zakwaterowanie lokalne (RNAL): <strong>176349/AL</strong>",
+            "complaint_book": "W obiekcie dostępna jest książka skarg i wniosków (<em>Livro de Reclamações</em>), o którą można w każdej chwili poprosić gospodarza.",
+            "security_privacy": "Bezpieczeństwo i prywatność",
+            "security_privacy_desc": "Dla bezpieczeństwa naszych gości obiekt jest wyposażony w zewnętrzną kamerę monitoringu skierowaną wyłącznie na główne drzwi wejściowe. Nagrania są przechowywane przez ograniczony czas.",
+            "ai_notice": "Tłumaczenia na tej stronie zostały w całości wykonane przez tłumaczy opartych na sztucznej inteligencji. Przepraszamy za ewentualne błędy ortograficzne lub niezbyt trafne sformułowania.",
+            "footer_rights": "Wszelkie prawa zastrzeżone.",
+            "footer_wish": "Życzymy Państwu niezapomnianego pobytu na Maderze!"
+        }
+        };
+
+        // ---- Image viewer (fits any screen; shows the card's title + instructions next to the photo)
+        const modal = $("imageModal"), img = $("galleryImg"), info = $("galleryInfo");
+        const navEls = [$("galleryPrev"), $("galleryNext"), $("galleryCount")];
+        let srcs = [], idx = 0;
+
+        const show = i => {
+            idx = (i + srcs.length) % srcs.length;
+            img.src = srcs[idx];
+            $("galleryCount").textContent = `${idx + 1} / ${srcs.length}`;
+        };
+        const setModal = open => {
+            modal.classList.toggle("hidden", !open);
+            modal.classList.toggle("flex", open);
+            document.body.classList.toggle("overflow-hidden", open);
+            if (!open) stopKeypad();
+        };
+        const openViewer = trigger => {
+            const isKeypad = trigger.dataset.gallery === "keypad";
+            srcs = isKeypad ? [] : galleries[trigger.dataset.gallery] || [trigger.getAttribute("src")];
+            const card = trigger.closest(".bg-white");
+            const title = card?.querySelector("h4")?.textContent.trim() || "";
+            const desc = card?.querySelector("p");
+            const list = card?.querySelector("ul, ol");
+            const steps = card ? [...card.querySelectorAll(".space-y-3 > div")] : [];
+            let html = desc ? `<p class="text-sm text-stone-600 leading-relaxed">${desc.innerHTML}</p>` : "";
+            if (list) {
+                const tag = list.tagName.toLowerCase();
+                html += `<${tag} class="mt-3 text-sm text-stone-700 space-y-2 ${tag === "ol" ? "list-decimal" : "list-disc"} list-inside leading-relaxed">${list.innerHTML}</${tag}>`;
+            } else if (steps.length) {
+                html += `<ol class="mt-3 text-sm text-stone-700 space-y-2 list-decimal list-inside leading-relaxed">${steps.map(s => `<li>${s.lastElementChild.textContent.replace(/\s+/g, " ").trim()}</li>`).join("")}</ol>`;
+            }
+            $("galleryTitle").textContent = title;
+            $("galleryText").innerHTML = html;
+            img.alt = title;
+            info.classList.toggle("hidden", !title && !html);
+            navEls.forEach(el => el.classList.toggle("hidden", srcs.length < 2));
+            info.scrollTop = 0;
+            img.classList.toggle("hidden", isKeypad);
+            $("keypadAnim").classList.toggle("hidden", !isKeypad);
+            if (!isKeypad) show(0);
+            setModal(true);
+            if (isKeypad) startKeypad(); else stopKeypad();
+        };
+
+        document.addEventListener("click", e => {
+            const trigger = e.target.closest("[data-gallery]");
+            if (trigger) openViewer(trigger);
+            else if (e.target === modal || e.target.closest("#closeModal")) setModal(false);
+            else if (e.target.closest("#galleryPrev")) show(idx - 1);
+            else if (e.target.closest("#galleryNext")) show(idx + 1);
+        });
+        document.addEventListener("keydown", e => {
+            if (modal.classList.contains("hidden")) return;
+            if (e.key === "Escape") setModal(false);
+            else if (srcs.length > 1 && e.key === "ArrowLeft") show(idx - 1);
+            else if (srcs.length > 1 && e.key === "ArrowRight") show(idx + 1);
+        });
+        let touchX = null;   // swipe left/right on touch screens
+        $("galleryStage").addEventListener("touchstart", e => touchX = e.touches[0].clientX, { passive: true });
+        $("galleryStage").addEventListener("touchend", e => {
+            if (touchX === null || srcs.length < 2) return;
+            const dx = e.changedTouches[0].clientX - touchX;
+            if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
+            touchX = null;
+        });
+
+        // ---- Keypad animation (replaces the photo in the viewer): a hand types a random code, then presses the key
+        const kpPad = $("kpPad"), kpHand = $("kpHand"), kpHandIn = $("kpHandIn"), kpDisp = $("kpDisp");
+        const kpSlots = [...kpDisp.querySelectorAll(".s")];
+        const kpKeys = {};
+        kpPad.querySelectorAll("[data-k]").forEach(el => kpKeys[el.dataset.k] = el);
+        let kpRun = 0;
+        const stopKeypad = () => { kpRun++; };
+        const kpMove = (x, y) => kpHand.style.transform = `translate(${x - 27.5}px, ${y - 2}px)`;
+        const kpRest = () => kpMove(kpPad.clientWidth * 0.7, kpPad.clientHeight + 30);
+        const kpCenter = el => {
+            const r = el.getBoundingClientRect(), p = kpPad.getBoundingClientRect(), s = p.width / kpPad.offsetWidth;
+            return [(r.left - p.left + r.width / 2) / s, (r.top - p.top + r.height / 2) / s];
+        };
+        const kpFill = i => { kpSlots[i].textContent = "*"; kpSlots[i].classList.add("f"); };
+        const kpClear = () => {
+            kpSlots.forEach(s => { s.textContent = "–"; s.classList.remove("f"); });
+            kpDisp.classList.remove("open");
+        };
+        const startKeypad = async () => {
+            const run = ++kpRun;
+            const nap = async ms => { await new Promise(r => setTimeout(r, ms)); if (run !== kpRun) throw 0; };
+            const tap = async (el, onPress) => {
+                kpMove(...kpCenter(el));
+                await nap(560);
+                el.classList.add("on"); kpHandIn.classList.add("p");
+                onPress();
+                await nap(170);
+                el.classList.remove("on"); kpHandIn.classList.remove("p");
+                await nap(130);
+            };
+            kpClear();
+            kpHand.style.opacity = 0;
+            if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                kpSlots.forEach((_, i) => kpFill(i));
+                kpDisp.classList.add("open");
+                return;
+            }
+            try {
+                kpHand.style.transition = "none";
+                kpRest();
+                await nap(50);
+                kpHand.style.transition = "transform .55s cubic-bezier(.4, 0, .2, 1), opacity .3s";
+                for (;;) {
+                    kpClear();
+                    kpHand.style.opacity = 1;
+                    await nap(600);
+                    const code = Array.from({ length: 4 }, () => Math.floor(Math.random() * 10));
+                    for (let i = 0; i < 4; i++) await tap(kpKeys[code[i]], () => kpFill(i));
+                    await tap(kpKeys.key, () => kpDisp.classList.add("open"));
+                    await nap(1700);
+                    kpRest();
+                    kpHand.style.opacity = 0;
+                    await nap(900);
+                }
+            } catch (e) { if (e !== 0) throw e; }
+        };
+
+        // ---- Tabs (switch panel + scroll it into view below the sticky header/nav)
+        const panels = document.querySelectorAll(".tab-content");
+        const tabBtns = document.querySelectorAll(".tab-btn");
+        $("tabNav").addEventListener("click", e => {
+            const btn = e.target.closest("[data-tab]");
+            if (!btn) return;
+            const panel = $("content-" + btn.dataset.tab);
+            panels.forEach(p => p.classList.toggle("hidden", p !== panel));
+            tabBtns.forEach(b => b.classList.toggle("active", b === btn));
+            window.scrollTo({
+                top: panel.getBoundingClientRect().top + window.scrollY - 250, // raise/lower this to taste
+                behavior: "smooth"
+            });
+        });
+
+        // ---- Language switcher
+        const i18n = [...document.querySelectorAll("[data-i18n]")].map(el => [el, el.dataset.i18n, el.innerHTML]);
+        const langBtn = $("langBtn"), langList = $("langList");
+        const toggleLangList = open => {
+            langList.classList.toggle("hidden", !open);
+            langBtn.setAttribute("aria-expanded", open);
+        };
+        const setLang = lang => {
+            const dict = translations[lang] || {};
+            i18n.forEach(([el, key, en]) => el.innerHTML = dict[key] ?? en);
+            document.documentElement.lang = lang;
+            langList.querySelectorAll("[data-lang]").forEach(o => {
+                const on = o.dataset.lang === lang;
+                o.setAttribute("aria-current", on);
+                if (on) {
+                    $("langFlag").className = o.firstElementChild.className;
+                    $("langCode").textContent = o.lastElementChild.textContent;
+                }
+            });
+        };
+        langBtn.addEventListener("click", () => toggleLangList(langList.classList.contains("hidden")));
+        langList.addEventListener("click", e => {
+            const opt = e.target.closest("[data-lang]");
+            if (!opt) return;
+            setLang(opt.dataset.lang);
+            toggleLangList(false);
+        });
+        document.addEventListener("click", e => { if (!e.target.closest("#langMenu")) toggleLangList(false); });
+        document.addEventListener("keydown", e => {
+            if (e.key === "Escape" && !langList.classList.contains("hidden")) { toggleLangList(false); langBtn.focus(); }
+        });
+
+        $("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
